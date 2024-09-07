@@ -1,8 +1,8 @@
 package com.example.md4casestudy.model;
 
 public enum StudentStatus {
-    ThoiHoc,
-    DinhChi,
-    ChoChuyenLop,
-    DangHoc
+    DroppedOut,      // Thôi học
+    Suspended,       // Đình chỉ
+    AwaitingTransfer, // Chờ chuyển lớp
+    Studying         // Đang học
 }

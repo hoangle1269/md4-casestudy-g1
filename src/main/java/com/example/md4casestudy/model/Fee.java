@@ -17,7 +17,7 @@ public class Fee {
     private int feeId;
 
     @ManyToOne
-    @JoinColumn(name = "studentId")
+    @JoinColumn(name = "student_id")
     private Student student;
 
     private BigDecimal amount;

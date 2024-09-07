@@ -1,9 +1,8 @@
 package com.example.md4casestudy.model;
 
-public enum UserRole
-{
+public enum UserRole {
     Admin,
-    GiangVien,
-    HocVien,
-    GiaoVu
+    Instructor,
+    Student,
+    AcademicStaff
 }

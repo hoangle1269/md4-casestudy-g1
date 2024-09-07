@@ -20,7 +20,7 @@ public class Student {
     private StudentStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "classId")
+    @JoinColumn(name = "class_id")
     private Class aClass;
 
     // Getters and Setters

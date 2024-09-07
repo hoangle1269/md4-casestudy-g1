@@ -15,11 +15,11 @@ public class Grade {
     private int gradeId;
 
     @ManyToOne
-    @JoinColumn(name = "studentId")
+    @JoinColumn(name = "student_id")
     private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "subjectId")
+    @JoinColumn(name = "subject_id")
     private Subject subject;
 
     private BigDecimal theoryGrade;//diem ly thuyet,số thục  giong double
