@@ -5,15 +5,17 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.Set;
 
+//Chứa thông tin chung về người dùng trong hệ thống.
 @Entity
 @Data
 @Table(name = "users")
-public class User {
+public class AppUser {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long UserId;
 
     private String email;
     private String password;
@@ -22,6 +24,11 @@ public class User {
     private Date dateOfBirth;
     private String address;
     private String identity;
+
+
+
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
 
 
 }
