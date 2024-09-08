@@ -17,6 +17,7 @@ public class AppUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long UserId;
 
+    @Column(unique = true, nullable = false)
     private String email;
     private String password;
     private String phoneNumber;
@@ -28,6 +29,7 @@ public class AppUser {
 
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private UserRole userRole;
 
 

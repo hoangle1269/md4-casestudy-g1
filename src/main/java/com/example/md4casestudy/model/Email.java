@@ -15,8 +15,12 @@ public class Email {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int emailId;
 
+    @Column(nullable = false)
     private String recipient;
+
+    @Column(nullable = false)
     private String subject;
+
     private String body;
     private LocalDate sentDate;
 
