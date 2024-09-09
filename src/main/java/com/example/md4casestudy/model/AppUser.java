@@ -26,8 +26,6 @@ public class AppUser {
     private String address;
     private String identity;
 
-
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private UserRole userRole;

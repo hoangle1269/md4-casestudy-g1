@@ -19,12 +19,9 @@ public class Fee {
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
-
     private BigDecimal amount;
-
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private FeeStatus status;
-
     private LocalDate dueDate;
 }
