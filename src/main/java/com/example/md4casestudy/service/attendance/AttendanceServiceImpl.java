@@ -28,22 +28,22 @@ public class AttendanceServiceImpl implements IAttendanceService {
 
     @Override
     public void saveAttendance(Long classId, Long lecturerId, String content) {
-        // Tìm lớp học dựa trên classId
+        if (classId == null || lecturerId == null) {
+            throw new IllegalArgumentException("classId or lecturerId must not be null");
+        }
+
         Classes classes = iClassRepos.findById(classId)
                 .orElseThrow(() -> new RuntimeException("Class not found with id: " + classId));
 
-        // Tìm giảng viên dựa trên lecturerId
         Lecturer lecturer = ilecturerRepository.findById(lecturerId)
                 .orElseThrow(() -> new RuntimeException("Lecturer not found with id: " + lecturerId));
 
-        // Tạo đối tượng Attendance và thiết lập các thuộc tính
         Attendance attendance = new Attendance();
         attendance.setAClasses(classes);
         attendance.setLecturer(lecturer);
         attendance.setDate(LocalDate.now());
         attendance.setContent(content);
 
-        // Lưu đối tượng Attendance vào cơ sở dữ liệu
         attendanceRepository.save(attendance);
     }
 
@@ -59,7 +59,7 @@ public class AttendanceServiceImpl implements IAttendanceService {
 
     @Override
     public Optional<Attendance> findById(Long id) {
-        return Optional.empty();
+        return attendanceRepository.findById(id);
     }
 
     @Override

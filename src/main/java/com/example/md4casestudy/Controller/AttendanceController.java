@@ -58,6 +58,12 @@ public class AttendanceController {
     @PostMapping("/save")
     public String create(@ModelAttribute("attendance") Attendance attendance,
                          RedirectAttributes redirectAttributes) {
+        if (attendance.getAClasses() == null || attendance.getAClasses().getClassId() == null ||
+                attendance.getLecturer() == null || attendance.getLecturer().getLecturerId() == null) {
+            redirectAttributes.addFlashAttribute("error", "Class or Lecturer information is missing.");
+            return "redirect:/attendances/create";
+        }
+
         attendanceService.saveAttendance(
                 attendance.getAClasses().getClassId(),
                 attendance.getLecturer().getLecturerId(),

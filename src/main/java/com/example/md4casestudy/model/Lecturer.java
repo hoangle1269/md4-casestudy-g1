@@ -17,11 +17,7 @@ public class Lecturer {
     @Column(unique = true, nullable = false)//Có giá trị duy nhất ko trùng lặp và ko null
     private String email;
 
-    private String password;
-    private String phoneNumber;
-    private String fullName;
-    private Date dateOfBirth;
-    private String address;
-    private String identity;
+    @OneToOne(cascade = CascadeType.ALL)
+    private AppUser lecturerUser;
 
 }

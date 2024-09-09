@@ -21,7 +21,7 @@
         <td th:text="${attendance.logId}"></td>
         <td th:text="${attendance.date}"></td>
         <td th:text="${attendance.getAClasses().getClassName()}"></td>
-        <td th:text="${attendance.getLecturer().getFullName()}"></td>
+        <td th:text="${attendance.getLecturer().getLecturerUser().getFullName()}"></td>
         <td th:text="${attendance.content}"></td>
 <!--        <td>-->
 <!--            <a th:href="@{/attendances/{id}/view(id=${attendance.logId})}">View</a>-->

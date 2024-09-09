@@ -31,7 +31,7 @@
     <tbody>
     <tr th:each="row,rowStat : ${students}">
         <td th:text="${row.getStudentUser().getFullName()}"></td>
-        <td th:text="${row.getAClasses().className}"></td>
+        <td th:text="${row.getAClasses().getClassName()}"></td>
         <td th:text="${row.getStatus()}"></td>
         <td><a th:href="@{/students/update/{id}(id=${row.getStudentId()})}">edit</a></td>
         <td><a th:href="@{/students/delete/{id}(id=${row.getStudentId()})}">delete</a></td>
