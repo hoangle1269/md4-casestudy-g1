@@ -1,6 +1,7 @@
 package com.example.md4casestudy.model;
 
 
+import com.example.md4casestudy.model.enums.FeeStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,9 +17,9 @@ public class Fee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long feeId;
 
-    @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
-    private Student student;
+//    @ManyToOne
+//    @JoinColumn(name = "student_id", nullable = false)
+//    private Student student;
 
     private BigDecimal amount;
 

@@ -10,7 +10,8 @@ import lombok.Data;
 public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long subjectId;
+    private Long id;
 
-    private String subjectName;
+    @Column(unique = true, nullable = false)
+    private String name;
 }
