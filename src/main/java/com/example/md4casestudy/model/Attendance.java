@@ -12,7 +12,7 @@ import java.time.LocalDate;
 public class Attendance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int logId;
+    private Long logId;
 
     @ManyToOne
     @JoinColumn(name = "class_id", nullable = false)

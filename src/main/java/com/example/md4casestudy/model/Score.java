@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 public class Score {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int scoreId;
+    private Long scoreId;
 
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
