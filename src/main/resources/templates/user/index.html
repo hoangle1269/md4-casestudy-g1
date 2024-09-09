@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sach</title>
+</head>
+<body>
+<div id="message">
+    <p th:text="${message}"></p>
+</div>
+<table>
+    <tr>
+        <th>STT</th>
+        <th>Tên</th>
+        <th>Xem chi tiết</th>
+        <th>Quản lý</th>
+    </tr>
+    <tr th:each="appUser, iterStat: ${users}" >
+        <td th:text="${iterStat.count}">No.</td>
+        <td th:text="${appUser.fullName}">Name</td>
+<!--        <td >Name</td>-->
+<!--        <td><a th:href="@{/books/detail/{id}(id=${book.id})}">Xem</a></td>-->
+        <td><a th:href="@{/#}">Xem</a></td>
+        <td>
+            <button th:onclick="'window.location.href = \'' +@{/#} + '\''">Sửa</button>
+<!--            <button th:onclick="'confirmDelete(' + ${appUser.userId} + ')'">Xoá</button>-->
+        </td>
+    </tr>
+</table><br>
+
+<!--<div id="page">-->
+<!--    <a class="page-btn" th:if="${books.hasPrevious()}"-->
+<!--       th:href="@{/books(page=${books.number - 1})}">&lt;</a>-->
+<!--    <span th:text="${books.number + 1}"></span> | <span th:text="${books.totalPages}"></span>-->
+<!--    <a class="page-btn" th:if="${books.hasNext()}"-->
+<!--       th:href="@{/books(page=${books.number + 1})}">&gt;</a>-->
+<!--</div>-->
+
+<script>
+    function confirmDelete(id) {
+        if (confirm("Bạn có chắc chắn muốn xóa người dùng này không?")) {
+            window.location.href = "/users/delete/" + id;
+        }
+    }
+</script>
+</body>
+</html>
