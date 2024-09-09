@@ -3,6 +3,7 @@ package com.example.md4casestudy.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 //Chứa thông tin về học viên.
@@ -20,6 +21,12 @@ public class Student {
 
     private String phoneNumber;
 
+    @Column(nullable = false)
+    private String address;
+
+    @Column(nullable = false)
+    private LocalDate dateOfBirth;
+
     @Enumerated(EnumType.STRING)
     private StudentStatus status;
 
@@ -28,7 +35,7 @@ public class Student {
     private Class aClass;
 
     @OneToMany(mappedBy = "student")
-    private Set<Grade> grades; // Liên kết đến điểm số
+    private Set<Score> scores; // Liên kết đến điểm số
 
     @OneToMany(mappedBy = "student")
     private Set<Fee> fees; // Liên kết đến học phí
