@@ -12,7 +12,7 @@ import java.util.Set;
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int studentId;
+    private Long studentId;
 
     private String fullName;
     private String email;

@@ -14,7 +14,7 @@ import java.time.LocalDate;
 public class Fee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int feeId;
+    private Long feeId;
 
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)

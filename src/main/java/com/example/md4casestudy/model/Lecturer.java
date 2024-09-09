@@ -14,7 +14,7 @@ public class Lecturer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long lecturerId;
 
-    @Column(unique = true, nullable = false)//Có giá trị duy nhất ko trùng lặp và ko null
+    @Column(unique = true, nullable = false)    //Có giá trị duy nhất ko trùng lặp và ko null
     private String email;
 
     private String password;
