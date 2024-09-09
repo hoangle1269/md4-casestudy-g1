@@ -15,24 +15,15 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studentId;
 
-    private String fullName;
-    private String email;
-
-
-    private String phoneNumber;
-
-    @Column(nullable = false)
-    private String address;
-
-    @Column(nullable = false)
-    private LocalDate dateOfBirth;
+    @OneToOne(cascade = CascadeType.ALL)
+    private AppUser studentUser;
 
     @Enumerated(EnumType.STRING)
     private StudentStatus status;
 
     @ManyToOne
     @JoinColumn(name = "class_id")
-    private Class aClass;
+    private Classes aClasses;
 
     @OneToMany(mappedBy = "student")
     private Set<Score> scores; // Liên kết đến điểm số

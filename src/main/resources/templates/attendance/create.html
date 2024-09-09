@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Attendance</title>
+</head>
+<body>
+<h1>Create Attendance</h1>
+<form th:action="@{/attendances/save}" th:object="${attendance}" method="post">
+    <label for="classId">Class:</label>
+    <select id="classId" name="aClasses.id">
+        <option th:each="cls : ${classes}" th:value="${cls.getClassId()}" th:text="${cls.getClassName()}"></option>
+    </select><br>
+
+    <label for="lecturerId">Lecturer:</label>
+    <select id="lecturerId" name="lecturer.id">
+        <option th:each="lecturer : ${lecturers}" th:value="${lecturer.getLecturerId()}" th:text="${lecturer.getFullName()}"></option>
+    </select><br>
+
+    <label for="content">Content:</label>
+    <textarea id="content" name="content" rows="4" cols="50"></textarea><br>
+
+    <button type="submit">Save</button>
+</form>
+<a href="/attendances">Back to List</a>
+</body>
+</html>

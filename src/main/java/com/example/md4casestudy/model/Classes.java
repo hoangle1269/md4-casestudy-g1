@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 @Data
 @Table(name = "classes")
-public class Class {
+public class Classes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long classId;
@@ -21,7 +21,7 @@ public class Class {
     @JoinColumn(name = "lecturer_id", nullable = false)
     private Lecturer lecturer;
 
-    @OneToMany(mappedBy = "aClass")
+    @OneToMany(mappedBy = "aClasses")
     private Set<Student> students; // Thêm liên kết đến học viên
 
 }

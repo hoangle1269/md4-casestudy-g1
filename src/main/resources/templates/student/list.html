@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h3>Them moi</h3>
+
+<p><a th:href="@{/students/create}">Add</a></p>
+
+<h1>Car Search Results</h1>
+<form th:action="@{/students/search}" method="get">
+    <input type="text" name="name" placeholder="Search by name" />
+    <button type="submit">Search</button>
+</form>
+<div class="notify">
+    <div th:if="${success}">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+<table th:if="${!students.isEmpty()}" id = "carList" >
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Class</th>
+        <th>Study status</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row,rowStat : ${students}">
+        <td th:text="${row.getStudentUser().getFullName()}"></td>
+        <td th:text="${row.getAClasses().className}"></td>
+        <td th:text="${row.getStatus()}"></td>
+        <td><a th:href="@{/students/update/{id}(id=${row.getStudentId()})}">edit</a></td>
+        <td><a th:href="@{/students/delete/{id}(id=${row.getStudentId()})}">delete</a></td>
+        <td><a th:href="@{/students/{id}/view(id=${row.getStudentId()})}">view</a></td>
+
+    </tbody>
+</table>
+<!--<div>-->
+<!--    <a th:if="${productList.hasPrevious()}"-->
+<!--       th:href="@{/cars(page=${productList.number - 1})}">Previous</a>-->
+<!--    <span th:text="${productList.number + 1}"></span> / <span th:text="${productList.totalPages}"></span>-->
+<!--    <a th:if="${productList.hasNext()}"-->
+<!--       th:href="@{/cars(page=${productList.number + 1})}">Next</a>-->
+<!--</div>-->
+<p th:if="${students.isEmpty()}">Khong co danh sach car</p>
+
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
