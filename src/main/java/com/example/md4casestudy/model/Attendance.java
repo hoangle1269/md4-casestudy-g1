@@ -23,8 +23,8 @@ public class Attendance {
     private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "instructor_id", nullable = false)
-    private Instructor instructor;
+    @JoinColumn(name = "lecturer_id", nullable = false)
+    private Lecturer lecturer;
 
     private LocalDate date;
     private String content;//Noi dung Nhat ky
