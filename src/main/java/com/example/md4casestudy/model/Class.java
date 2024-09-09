@@ -18,8 +18,8 @@ public class Class {
     private String className;
 
     @ManyToOne
-    @JoinColumn(name = "instructor_id", nullable = false)
-    private Instructor instructor;
+    @JoinColumn(name = "lecturer_id", nullable = false)
+    private Lecturer lecturer;
 
     @OneToMany(mappedBy = "aClass")
     private Set<Student> students; // Thêm liên kết đến học viên
