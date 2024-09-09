@@ -28,7 +28,7 @@ public class Student {
     private Class aClass;
 
     @OneToMany(mappedBy = "student")
-    private Set<Grade> grades; // Liên kết đến điểm số
+    private Set<Score> scores; // Liên kết đến điểm số
 
     @OneToMany(mappedBy = "student")
     private Set<Fee> fees; // Liên kết đến học phí
