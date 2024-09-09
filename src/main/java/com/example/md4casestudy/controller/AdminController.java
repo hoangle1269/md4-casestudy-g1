@@ -5,6 +5,7 @@ import com.example.md4casestudy.model.User;
 import com.example.md4casestudy.repository.UserRepository;
 import com.example.md4casestudy.model.dto.TeacherStudentCountDTO;
 import com.example.md4casestudy.service.appUser.AppUserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,9 +25,9 @@ public class AdminController {
     private UserRepository userRepository;
 
     @GetMapping
-    public String homePage() {
+    public String homePage(Model model) {
         List<TeacherStudentCountDTO> teacherStudentCountDTO = userRepository.findTeacherStudentCounts();
-
+        model.addAttribute("teacherStudentCountDTO", teacherStudentCountDTO);
         return "adminPages/index";
     }
 
@@ -51,7 +52,7 @@ public class AdminController {
     @GetMapping("/fees")
 
     public void checkFeesAndSendReminders() {
-        System.out.println("/////////////////////////////"+userRepository.findTeacherStudentCounts());
+        System.out.println("/////////////////////////////" + userRepository.findTeacherStudentCounts());
     }
 }
 
