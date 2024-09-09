@@ -19,6 +19,7 @@ public class AppUser {
 
     @Column(unique = true, nullable = false)
     private String email;
+
     private String password;
     private String phoneNumber;
     private String fullName;
