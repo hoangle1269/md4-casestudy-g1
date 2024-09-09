@@ -15,15 +15,15 @@ public class Attendance {
     private int logId;
 
     @ManyToOne
-    @JoinColumn(name = "class_id")
+    @JoinColumn(name = "class_id", nullable = false)
     private Class aClass;
 
     @ManyToOne
-    @JoinColumn(name = "student_id")
+    @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
     @ManyToOne
-    @JoinColumn(name = "instructor_id")
+    @JoinColumn(name = "instructor_id", nullable = false)
     private Instructor instructor;
 
     private LocalDate date;

@@ -3,6 +3,8 @@ package com.example.md4casestudy.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Set;
+
 //Chứa thông tin về học viên.
 @Entity
 @Data
@@ -14,6 +16,8 @@ public class Student {
 
     private String fullName;
     private String email;
+
+
     private String phoneNumber;
 
     @Enumerated(EnumType.STRING)
@@ -23,5 +27,10 @@ public class Student {
     @JoinColumn(name = "class_id")
     private Class aClass;
 
+    @OneToMany(mappedBy = "student")
+    private Set<Grade> grades; // Liên kết đến điểm số
+
+    @OneToMany(mappedBy = "student")
+    private Set<Fee> fees; // Liên kết đến học phí
     // Getters and Setters
 }

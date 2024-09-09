@@ -16,6 +16,7 @@ public class Statistic {
     private int statId;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private StatisticType type;
 
     private BigDecimal value;
