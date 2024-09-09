@@ -1,30 +1,33 @@
 package com.example.md4casestudy.model;
 
-
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.util.Date;
 
-@Entity
 @Data
-@Table(name = "fee")
-//Chứa thông tin về học phí của học viên.
+@Entity
+@Table(name = "Fees")
 public class Fee {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long feeId;
+    @Column(name = "feeid")
+    private Integer feeId;
 
     @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
+    @JoinColumn(name = "studentid")
     private Student student;
 
-    private BigDecimal amount;
+    @Column(name = "duedate", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date dueDate;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private FeeStatus status;
+    @Column(name = "Amount", nullable = false)
+    private Double amount;
 
-    private LocalDate dueDate;
+    @NotNull
+
+    private String status;
 }

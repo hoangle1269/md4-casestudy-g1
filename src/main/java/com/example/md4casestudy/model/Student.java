@@ -1,43 +1,26 @@
 package com.example.md4casestudy.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.time.LocalDate;
-import java.util.Set;
-
-//Chứa thông tin về học viên.
-@Entity
 @Data
-@Table(name = "student")
+@Entity
+@Table(name = "Students")
 public class Student {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long studentId;
-
-    private String fullName;
-    private String email;
-
-
-    private String phoneNumber;
-
-    @Column(nullable = false)
-    private String address;
-
-    @Column(nullable = false)
-    private LocalDate dateOfBirth;
-
-    @Enumerated(EnumType.STRING)
-    private StudentStatus status;
+    @Column(name = "studentid")
+    private Integer studentId;
 
     @ManyToOne
-    @JoinColumn(name = "class_id")
-    private Class aClass;
+    @JoinColumn(name = "userid")
+    private User user;
 
-    @OneToMany(mappedBy = "student")
-    private Set<Score> scores; // Liên kết đến điểm số
-
-    @OneToMany(mappedBy = "student")
-    private Set<Fee> fees; // Liên kết đến học phí
-    // Getters and Setters
+    @ManyToOne
+    @JoinColumn(name = "classid")
+    private Class className;
+    @NotNull
+    private String status;
 }
