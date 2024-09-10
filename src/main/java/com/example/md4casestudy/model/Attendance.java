@@ -5,14 +5,13 @@ import lombok.Data;
 
 import java.time.LocalDate;
 
-//Chứa nhật ký hàng ngày cho lớp học và học viên.
 @Entity
 @Data
 @Table(name = "attendance")
 public class Attendance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int logId;
+    private Long logId;
 
     @ManyToOne
     @JoinColumn(name = "class_id", nullable = false)
