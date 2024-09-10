@@ -13,8 +13,10 @@ import java.util.Set;
 public class Class {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "class_id")
     private Long classId;
 
+    @Column(name = "class_name", nullable = false)
     private String className;
 
     @ManyToOne

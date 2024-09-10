@@ -1,5 +1,6 @@
 package com.example.md4casestudy.model;
 
+import com.example.md4casestudy.model.ENUM.ROLE;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -21,20 +22,26 @@ public class User {
     private String email;
 
     @NotNull
-    @Size
-            (min = 6, max = 8)
+    @Size(min = 6, max = 8)
     private String password;
-@Column(name = "phonenumber")
+
+    @Column(name = "phone_number")
     private String phoneNumber;
-@Column(name = "fullname")
+
+    @Column(name = "full_name")
     private String fullName;
-@Column(name = "dateofbirth")
+
+    @Column(name = "date_of_birth")
     private String dateOfBirth;
+
     private String address;
     private String identity;
 
     @NotNull
-    private String role;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ROLE role;
+
 
 
 }

@@ -8,7 +8,7 @@ import java.time.LocalDate;
 //Chứa nhật ký hàng ngày cho lớp học và học viên.
 @Entity
 @Data
-@Table(name = "attendance")
+@Table(name = "attendances")
 public class Attendance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

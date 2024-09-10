@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>View Scores</title>
+</head>
+<body>
+<h1>View and Update Scores</h1>
+
+<!-- Form to update scores -->
+<form action="#" th:action="@{/staff/updateScore}" method="post">
+    <label for="studentId">Student ID:</label>
+    <input type="text" id="studentId" name="studentId" required />
+
+    <label for="subjectId">Subject ID:</label>
+    <input type="text" id="subjectId" name="subjectId" required />
+
+    <label for="theoryScore">Theory Score:</label>
+    <input type="number" id="theoryScore" name="theoryScore" step="0.01" required />
+
+    <label for="practicalScore">Practical Score:</label>
+    <input type="number" id="practicalScore" name="practicalScore" step="0.01" required />
+
+    <button type="submit">Update Score</button>
+</form>
+
+<!-- Display scores -->
+<h2>Scores:</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Student ID</th>
+        <th>Subject ID</th>
+        <th>Theory Score</th>
+        <th>Practical Score</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Example data -->
+    <tr th:each="score : ${scores}">
+        <td th:text="${score.student.studentId}">Student ID</td>
+        <td th:text="${score.subject.subjectId}">Subject ID</td>
+        <td th:text="${score.theoryScore}">Theory Score</td>
+        <td th:text="${score.practicalScore}">Practical Score</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

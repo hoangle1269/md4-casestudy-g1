@@ -1,17 +1,17 @@
 package com.example.md4casestudy.model.ENUM;
 
 public enum FEE_STATUS {
-    TUITION("tuition debt"),
+    NOT_SUBMITTED("tuition debt"),
     SUBMITTED("submitted");
 
 
-    private final String freeStatus;
+    private final String feeStatus;
 
-    FEE_STATUS(String freeStatus) {
-        this.freeStatus = freeStatus;
+    FEE_STATUS(String feeStatus) {
+        this.feeStatus = feeStatus;
     }
 
     public String getRoleName() {
-        return freeStatus;
+        return feeStatus;
     }
     }

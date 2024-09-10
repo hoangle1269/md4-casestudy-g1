@@ -33,7 +33,7 @@ public class FeeReminderScheduler {
     public void checkFeesAndSendReminders() {
         List<Fee> feesDueSoon = feeRepository.findFeesDueSoon(sqlDate2, sqlDate1);
         for (Fee fee : feesDueSoon) {
-            if (fee.getStatus().equals(FEE_STATUS.TUITION.getRoleName())){
+            if (fee.getStatus().equals(FEE_STATUS.NOT_SUBMITTED.getRoleName())){
                 String email = fee.getStudent().getUser().getEmail();
                 String subject = "Hạn nộp học phí sắp đến!";
                 String text = String.format("Chào %s, hạn nộp học phí của bạn là ngày %s. Vui lòng thanh toán trước ngày đó để tránh bị phạt.",
