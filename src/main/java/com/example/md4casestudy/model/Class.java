@@ -11,7 +11,7 @@ public class Class {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "classid")
-    private Integer classId;
+    private Long classId;
 
     @Column(name = "classname", nullable = false)
     private String className;
@@ -20,4 +20,12 @@ public class Class {
     @JoinColumn(name = "teacherid")
     private User lecturer;
 
+    @Override
+    public String toString() {
+        return "Class{" +
+                "classId=" + classId +
+                ", className='" + className + '\'' +
+                ", lecturer=" + lecturer +
+                '}';
+    }
 }

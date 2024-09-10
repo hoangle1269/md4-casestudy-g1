@@ -1,4 +1,4 @@
-package com.example.md4casestudy.config;
+package com.example.md4casestudy.config.security;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

@@ -1,4 +1,4 @@
-package com.example.md4casestudy.config;////package org.example.caselogin.config;
+package com.example.md4casestudy.config.security;////package org.example.caselogin.config;
 ////
 ////import org.example.caselogin.controller.CustomSuccessHandle;
 ////import org.example.caselogin.model.ENUM.ROLE;
