@@ -20,13 +20,13 @@ import java.util.List;
 public class AdminController {
     @Autowired
     AppUserService userService;
+
     @Autowired
     private UserRepository userRepository;
 
     @GetMapping
     public String homePage() {
         List<TeacherStudentCountDTO> teacherStudentCountDTO = userRepository.findTeacherStudentCounts();
-
         return "adminPages/index";
     }
 

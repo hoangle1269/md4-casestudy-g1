@@ -30,4 +30,10 @@ public class LoginController {
     public String error404() {
         return "error_404";
     }
+
+//    @GetMapping("/staff")
+//    public String staff() {
+//        return "staff/staff-view";
+//    }
+
 }

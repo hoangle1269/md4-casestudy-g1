@@ -29,7 +29,7 @@ public class Student {
 
     @ManyToOne
     @JoinColumn(name = "class_id")
-    private Class aClass;
+    private Classes classes;
 
     @OneToMany(mappedBy = "student")
     private Set<Score> scores; // Liên kết đến điểm số

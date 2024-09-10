@@ -16,7 +16,7 @@ public class Attendance {
 
     @ManyToOne
     @JoinColumn(name = "class_id", nullable = false)
-    private Class aClass;
+    private Classes aClasses;
 
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
@@ -26,6 +26,8 @@ public class Attendance {
     @JoinColumn(name = "lecturer_id", nullable = false)
     private Lecturer lecturer;
 
-    private LocalDate date;
+    @Column(name = "date", nullable = false)
+    private LocalDate date = LocalDate.now();
+
     private String content;//Noi dung Nhat ky
 }

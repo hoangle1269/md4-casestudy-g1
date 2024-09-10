@@ -15,8 +15,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT new com.example.md4casestudy.model.dto.TeacherStudentCountDTO(u.id, u.fullName, c.className, COUNT(s.studentId)) " +
             "FROM User u " +
-            "LEFT JOIN Class c ON u.id = c.lecturer.lecturerId " +
-            "LEFT JOIN Student s ON c.classId = s.aClass.classId " +
+            "LEFT JOIN Classes c ON u.id = c.lecturer.lecturerId " +
+            "LEFT JOIN Student s ON c.classId = s.classes.classId " +
             "WHERE u.role = 'LECTURER' " +
             "GROUP BY u.id, u.fullName, c.className")
     List<TeacherStudentCountDTO> findTeacherStudentCounts();

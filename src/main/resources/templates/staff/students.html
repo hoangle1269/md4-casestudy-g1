@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student List</title>
+    <link rel="stylesheet" th:href="@{../../../staradmin/src/assets/vendors/feather/feather.css}">
+    <link rel="stylesheet" th:href="@{../../../staradmin/src/assets/vendors/mdi/css/materialdesignicons.min.css}">
+    <link rel="stylesheet" th:href="@{../../../staradmin/src/assets/vendors/ti-icons/css/themify-icons.css}">
+    <link rel="stylesheet" th:href="@{../../../staradmin/src/assets/vendors/font-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{../../../staradmin/src/assets/vendors/typicons/typicons.css}">
+    <link rel="stylesheet"
+          th:href="@{../../../staradmin/src/assets/vendors/simple-line-icons/css/simple-line-icons.css}">
+    <link rel="stylesheet" th:href="@{../../../staradmin/src/assets/vendors/css/vendor.bundle.base.css}">
+    <link rel="stylesheet"
+          th:href="@{../../../staradmin/src/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css}">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" th:href="@{../../../staradmin/src/assets/css/style.css}">
+    <!-- endinject -->
+    <link rel="shortcut icon" th:href="@{../../../staradmin/src/assets/images/favicon.png}"/>
+</head>
+<body>
+<h1>Student List</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Class</th>
+        <th>Theory Score</th>
+        <th>Practical Score</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="student : ${students}">
+        <td th:text="${student.studentId}"></td>
+        <td th:text="${student.fullName}"></td>
+        <td th:text="${student.email}"></td>
+        <td th:text="${student.classes.className}"></td>
+<!--        <td th:text="${#numbers.formatDecimal(student.scores?.get(0)?.theoryScore, 2, 2)}"></td>-->
+<!--        <td th:text="${#numbers.formatDecimal(student.scores?.get(0)?.practicalScore, 2, 2)}"></td>-->
+<!--        <td>-->
+<!--            <form th:action="@{/staff/students/update-status}" method="post">-->
+<!--                <input type="hidden" name="studentId" th:value="${student.studentId}"/>-->
+<!--                <select name="status" th:field="*{student.status}">-->
+<!--                    <option th:each="status : ${statuses}" th:value="${status.name()}"-->
+<!--                            th:text="${status.getRoleName()}" th:selected="${status.name() == student.status.name()}">-->
+<!--                    </option>-->
+<!--                </select>-->
+<!--                <button type="submit">Update</button>-->
+<!--            </form>-->
+<!--        </td>-->
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

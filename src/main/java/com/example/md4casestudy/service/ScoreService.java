@@ -11,10 +11,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ScoreService implements IScoreService {
+public class ScoreService  implements IScoreService{
 
     @Autowired
     private ScoreRepository scoreRepository;
+
+    public List<Score> findByStudent_StudentId(Long studentId) {
+        return scoreRepository.findByStudent_StudentId(studentId);
+    }
+
 
     public void updateScore(Long studentId, Long subjectId, BigDecimal theoryScore, BigDecimal practicalScore) {
         Score score = scoreRepository.findByStudent_StudentIdAndSubject_SubjectId(studentId, subjectId)
@@ -23,16 +28,6 @@ public class ScoreService implements IScoreService {
         score.setPracticalScore(practicalScore);
         scoreRepository.save(score);
     }
-
-
-//    public void updateScore(Long studentId, Long subjectId, BigDecimal theoryScore, BigDecimal practicalScore) {
-//        Score score = scoreRepository.findByStudentIdAndSubjectId(studentId, subjectId)
-//                .orElseThrow(() -> new ScoreNotFoundException("Score record not found for studentId: " + studentId + " and subjectId: " + subjectId));
-//        score.setTheoryScore(theoryScore);
-//        score.setPracticalScore(practicalScore);
-//        scoreRepository.save(score);
-//    }
-
 
 
     public BigDecimal calculateAverage(Long studentId) {
