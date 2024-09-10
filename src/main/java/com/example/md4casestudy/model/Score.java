@@ -21,8 +21,9 @@ public class Score {
     @ManyToOne
     @JoinColumn(name = "subject_id", nullable = false)
     private Subject subject;
-
-    private BigDecimal theoryGrade;//diem ly thuyet,số thục  giong double
+    @Column(name = "exam_period")
+    private Integer examPeriod;
+    private BigDecimal theoryGrade;//diem ly thuyet,số thụ double
     private BigDecimal practicalGrade;//diem thuc hanh
 }
 

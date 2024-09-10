@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fee Status</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Fee Status for Student</h1>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Fee ID</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Due Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="fee : ${fees}">
+            <td th:text="${fee.feeId}">Fee ID</td>
+            <td th:text="${fee.amount}">Amount</td>
+            <td th:text="${fee.status}">Status</td>
+            <td th:text="${fee.dueDate}">Due Date</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

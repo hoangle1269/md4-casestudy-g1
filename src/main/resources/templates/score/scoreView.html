@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Scores</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1>Scores for Student</h1>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Exam Period</th>
+            <th>Theory Grade</th>
+            <th>Practical Grade</th>
+            <th>Subject Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="score : ${scores}">
+            <td th:text="${score.examPeriod}">Exam Period</td>
+            <td th:text="${score.theoryGrade}">Theory Grade</td>
+            <td th:text="${score.practicalGrade}">Practical Grade</td>
+            <td th:text="${score.subjectName}">Subject Name</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface IFeeRepository extends JpaRepository<Fee, Long> {
-    @Query(value = "CALL GetNextFeeAndStatus(:studentId)", nativeQuery = true)
-    List<Object[]> findNextFeeAndStatus(@Param("studentId") Long studentId);
+    @Query(value = "CALL GetAllFeeStatus(:studentId)", nativeQuery = true)
+    List<Object[]> findAllFeeStatus(@Param("studentId") Long studentId);
 
 }

@@ -8,9 +8,9 @@ import java.math.BigDecimal;
 @Data
 public class ScoreDTO {
     private Long scoreId;
-    private Student student;
-    private Subject subject;
+    private Integer examPeriod;
+    private Long studentId;
+    private String subjectName;
     private BigDecimal theoryGrade;
     private BigDecimal practicalGrade;
-
 }

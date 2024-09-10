@@ -9,14 +9,15 @@ import java.time.LocalDate;
 import java.util.Set;
 @Data
 public class StudentDTO {
-private Long studentId;
-private String fullName;
-private String email;
-private String phoneNumber;
-private String address;
-private LocalDate dateOfBrith;
-private StudentStatus status;
-private Class aClass;
-private Set<Score> scores;
-private Set<Fee> fees;
+    private Long studentId;
+    private String fullName;
+    private String email;
+    private String phoneNumber;
+    private String address;
+    private LocalDate dateOfBirth;
+    private StudentStatus status;
+    private Long classId;
+    private Set<Long> scoreIds;
+    private Set<Long> feeIds;
 }
+
