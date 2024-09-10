@@ -1,7 +1,7 @@
 package com.example.md4casestudy.Controller;
 
 
-import com.example.md4casestudy.model.AppUser;
+import com.example.md4casestudy.model.User;
 import com.example.md4casestudy.model.Classes;
 import com.example.md4casestudy.model.Student;
 import com.example.md4casestudy.service.classes.IClassService;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -26,8 +27,7 @@ public class StudentController {
 
     @Autowired
     private IClassService iClassService;
-    @Autowired
-    private StudentService studentService;
+
 
     @Autowired
     private UserService userService;
@@ -38,7 +38,7 @@ public class StudentController {
     }
 
     @ModelAttribute("users")
-    public Iterable<AppUser> users() {
+    public Iterable<User> users() {
         return userService.findAll();
     }
 
@@ -57,13 +57,13 @@ public class StudentController {
     @PostMapping("/save")
     public String create(@ModelAttribute("student") Student student,
                          RedirectAttributes redirectAttributes) {
-        studentService.save(student);
+        iStudentService.save(student);
         redirectAttributes.addFlashAttribute("message", "Create new student successfully");
         return "redirect:/students";
     }
     @GetMapping("/update/{id}")
     public ModelAndView updateForm(@PathVariable Long id) {
-        Optional<Student> student = studentService.findById(id);
+        Optional<Student> student = iStudentService.findById(id);
         if (student.isPresent()) {
             ModelAndView modelAndView = new ModelAndView("/student/update");
             modelAndView.addObject("student", student.get());
@@ -75,7 +75,7 @@ public class StudentController {
     @PostMapping("/update/{id}")
     public String update(@ModelAttribute("student") Student student,
                          RedirectAttributes redirect) {
-        studentService.save(student);
+        iStudentService.save(student);
         redirect.addFlashAttribute("message", "Update student successfully");
         return "redirect:/students";
     }
@@ -92,5 +92,18 @@ public class StudentController {
         modelAndView.addObject("student", studentOptional.get());
         return modelAndView;
     }
+    @GetMapping("/search")
+    public ModelAndView searchStudentsByClass(@RequestParam(value = "className", required = false) String className) {
+        Iterable<Student> students;
+        if (className != null && !className.isEmpty()) {
+            students = iStudentService.findAllByClassName(className);
+        } else {
+            students = iStudentService.findAll(); // Trả về danh sách tất cả học viên nếu không có className
+        }
 
+        ModelAndView modelAndView = new ModelAndView("student/list"); // Tên của Thymeleaf template để hiển thị danh sách học viên
+        modelAndView.addObject("students", students);
+        modelAndView.addObject("classes", iClassService.findAll()); // Đưa danh sách lớp học để dùng trong form tìm kiếm
+        return modelAndView;
+    }
 }

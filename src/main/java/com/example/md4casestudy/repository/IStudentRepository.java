@@ -10,8 +10,7 @@ import java.util.List;
 @Repository
 public interface IStudentRepository extends JpaRepository<Student, Long> {
 
-//    List<Student> findAllByFullNameContainingIgnoreCase(String fullName);
 
 
-
+    List<Student> findAllByClasses_ClassName(String className);
 }

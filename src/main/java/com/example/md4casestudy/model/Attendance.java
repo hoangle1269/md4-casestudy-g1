@@ -7,10 +7,11 @@ import java.time.LocalDate;
 
 @Entity
 @Data
-@Table(name = "attendance")
+@Table(name = "class_diaries")
 public class Attendance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "log_id")
     private Long logId;
 
     @ManyToOne
@@ -24,6 +25,6 @@ public class Attendance {
     @Column(name = "date", nullable = false)
     private LocalDate date = LocalDate.now(); // Ngày hiện tại sẽ được gán mặc định
 
-    @Column(name = "content", nullable = false)
+
     private String content; // Nội dung nhật ký
 }

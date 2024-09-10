@@ -13,15 +13,18 @@ import java.util.Set;
 public class Classes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "class_id")
     private Long classId;
 
+
+    @Column(name = "class_name", nullable = false)
     private String className;
 
     @ManyToOne
     @JoinColumn(name = "lecturer_id", nullable = false)
     private Lecturer lecturer;
 
-    @OneToMany(mappedBy = "aClasses")
+    @OneToMany(mappedBy = "classes")
     private Set<Student> students; // Thêm liên kết đến học viên
 
 }

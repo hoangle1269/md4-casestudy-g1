@@ -5,6 +5,7 @@ import com.example.md4casestudy.repository.IStudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,10 +15,7 @@ public class StudentService implements IStudentService {
 private IStudentRepository iStudentRepository;
 
 
-//    @Override
-//    public List<Student> findAllByFullNameContainingIgnoreCase(String fullName) {
-//        return iStudentRepository.findAllByFullNameContainingIgnoreCase(fullName);
-//    }
+
 
     @Override
     public Iterable<Student> findAll() {
@@ -37,5 +35,10 @@ private IStudentRepository iStudentRepository;
     @Override
     public void remove(Long id) {
         iStudentRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Student> findAllByClassName(String className) {
+        return iStudentRepository.findAllByClasses_ClassName(className);
     }
 }
