@@ -14,4 +14,4 @@ public enum FEE_STATUS {
     public String getRoleName() {
         return freeStatus;
     }
-    }
+}
