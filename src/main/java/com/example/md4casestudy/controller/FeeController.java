@@ -18,7 +18,10 @@ public class FeeController {
     @GetMapping("/student/{studentId}/fees")
     public String getAllFeeStatus(@PathVariable("studentId") Long studentId, Model model) {
         List<FeeDTO> fees = feeService.getAllFeeStatus(studentId);
+        System.out.println(fees);
         model.addAttribute("fees", fees);
         return "/fee/feeView";
     }
+
 }
+

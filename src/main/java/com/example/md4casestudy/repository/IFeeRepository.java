@@ -10,5 +10,4 @@ import java.util.List;
 public interface IFeeRepository extends JpaRepository<Fee, Long> {
     @Query(value = "CALL GetAllFeeStatus(:studentId)", nativeQuery = true)
     List<Object[]> findAllFeeStatus(@Param("studentId") Long studentId);
-
 }
