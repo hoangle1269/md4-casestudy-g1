@@ -12,6 +12,10 @@ public class ClassStudentGradeDTO {
     public ClassStudentGradeDTO() {
     }
 
+    public ClassStudentGradeDTO(Student studentName) {
+        this.studentName = studentName;
+    }
+
     public ClassStudentGradeDTO(Classes className, Student studentName, Subject subjectName, Grades grade) {
         this.className = className;
         this.studentName = studentName;

@@ -1,12 +1,11 @@
 package com.example.md4casestudy.controller;
 
-import com.example.md4casestudy.model.Classes;
-import com.example.md4casestudy.model.Student;
+
+import com.example.md4casestudy.model.ENUM.ROLE;
 import com.example.md4casestudy.model.User;
-import com.example.md4casestudy.model.dto.ClassAverageGradeDTO;
-import com.example.md4casestudy.model.dto.StudentAverageGradeDTO;
-import com.example.md4casestudy.model.dto.TeacherStudentCountDTO;
+import com.example.md4casestudy.model.dto.*;
 import com.example.md4casestudy.repository.GradeRepository;
+import com.example.md4casestudy.repository.StaffRepository;
 import com.example.md4casestudy.repository.UserRepository;
 import com.example.md4casestudy.service.appUser.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -28,6 +28,8 @@ public class StaffController {
     private UserRepository userRepository;
     @Autowired
     private GradeRepository gradesRepository;
+    @Autowired
+    private StaffRepository staffRepository;
 
     @GetMapping
     public String homePage(Model model) {
@@ -42,20 +44,35 @@ public class StaffController {
         model.addAttribute("teacher", teacherStudentCountDTO);
         return "staffPages/index";
     }
+
     @GetMapping("/studentList/{id}")
 
     public String checkFeesAndSendReminders(Model model, @PathVariable long id) {
         List<StudentAverageGradeDTO> studentAverageGradeDTO = gradesRepository.findAverageGradesByClassId(id);
-        List<User> student = new ArrayList<User>();
+        List<StudentIdDTO> student = new ArrayList<StudentIdDTO>();
         for (StudentAverageGradeDTO studentAverageGrade : studentAverageGradeDTO) {
-            student.add(studentAverageGrade.getStudents());
+            student.add(new StudentIdDTO(studentAverageGrade.getStudents().getFullName(), studentAverageGrade.getStudents().getEmail(), studentAverageGrade.getStudent().getStudentId()));
         }
         model.addAttribute("student", student);
         return "staffPages/index";
     }
 
+    @GetMapping("/grades/{id}")
+    public String staffClasses(Model model, @PathVariable Long id) {
+        List<ClassStudentGradeDTO> classAverageGradeDTO = staffRepository.findClassStudentGradeDetailsByStudentId(id);
+        model.addAttribute("classAverageGradeDTO", classAverageGradeDTO);
+        return "staffPages/index";
+    }
+
+    @GetMapping("/add")
+    public String addStaff(Model model) {
+//        model.addAttribute("user", new User());
+//        model.addAttribute("roles", Arrays.asList(ROLE.values()));
+        return "staffPages/forms/addAndEdit";
+    }
+
     @GetMapping("/reports")
     public String staffReports() {
-        return "staff/reports";
+        return "staffPages/index";
     }
 }

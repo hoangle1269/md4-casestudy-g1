@@ -16,7 +16,7 @@ public interface GradeRepository extends JpaRepository<Grades, Long> {
     @Query("SELECT new com.example.md4casestudy.model.dto.StudentAverageGradeDTO(s.className,s.user, AVG(g.averageGrade)) FROM Student s JOIN Grades g ON s.studentId = g.student.studentId GROUP BY s.className.classId, s.studentId")
     List<StudentAverageGradeDTO> findAverageGradesByStudent();
 
-    @Query("SELECT new  com.example.md4casestudy.model.dto.StudentAverageGradeDTO(s.className, s.user, AVG(g.averageGrade)) FROM Student s JOIN Grades g ON s.studentId = g.student.studentId WHERE s.className.classId = :classId GROUP BY s.className.classId, s.studentId")
+    @Query("SELECT new  com.example.md4casestudy.model.dto.StudentAverageGradeDTO(s.className, s.user,AVG(g.averageGrade),s) FROM Student s JOIN Grades g ON s.studentId = g.student.studentId WHERE s.className.classId = :classId GROUP BY s.className.classId, s.studentId")
     List<StudentAverageGradeDTO> findAverageGradesByClassId(@Param("classId") Long classId);
 
 
