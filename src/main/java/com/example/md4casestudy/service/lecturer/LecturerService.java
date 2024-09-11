@@ -20,12 +20,12 @@ public class LecturerService implements ILecturerService {
 
     @Override
     public void save(Lecturer lecturer) {
-
+    iLecturerRepository.save(lecturer);
     }
 
     @Override
-    public Optional<Lecturer> findById(Long id) {
-        return Optional.empty();
+    public Optional<Lecturer> findById(Long lecturerId) {
+        return iLecturerRepository.findById(lecturerId);
     }
 
     @Override

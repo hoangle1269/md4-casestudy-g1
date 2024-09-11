@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Create Student Diary</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Create Diary for <span th:text="${student.studentUser.fullName}"></span></h1>
+    <form th:action="@{/student-diaries/save}" th:object="${diary}" method="post">
+        <input type="hidden" name="studentId" th:value="${student.studentId}" />
+        <div class="form-group">
+            <label for="lecturerId">Lecturer:</label>
+            <select id="lecturerId" name="lecturerId" class="form-control" required>
+                <option th:each="lecturer : ${lecturers}"
+                        th:value="${lecturer.lecturerId}"
+                        th:text="${lecturer.lecturerUser.fullName}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="content">Content:</label>
+            <textarea id="content" name="content" class="form-control" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Diary</button>
+        <a th:href="@{/student-diaries/list(studentId=${student.studentId})}" class="btn btn-secondary">Back to Diaries</a>
+    </form>
+</div>
+</body>
+</html>

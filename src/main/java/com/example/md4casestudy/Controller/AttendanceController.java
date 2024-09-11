@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -44,34 +46,76 @@ public class AttendanceController {
     }
 
     @GetMapping
-    public String getAllAttendances(Model model) {
-        model.addAttribute("attendances", attendanceService.findAll());
+    public String getAttendancesByClass(@RequestParam("classId") Long classId, Model model) {
+        Optional<Classes> optionalClass = classesService.findById(classId);
+        if (!optionalClass.isPresent()) {
+            return "redirect:/error";
+        }
+
+        List<Attendance> attendances = attendanceService.findByClassId(classId);
+        model.addAttribute("attendances", attendances);
+        model.addAttribute("classId", classId);
         return "/attendance/list";
     }
 
+    // Controller method to display the form for creating attendance
     @GetMapping("/create")
-    public String create(Model model) {
-        model.addAttribute("attendance", new Attendance());
-        return "/attendance/create";
-    }
-
-    @PostMapping("/save")
-    public String create(@ModelAttribute("attendance") Attendance attendance,
-                         RedirectAttributes redirectAttributes) {
-        if (attendance.getAClasses() == null || attendance.getAClasses().getClassId() == null ||
-                attendance.getLecturer() == null || attendance.getLecturer().getLecturerId() == null) {
-            redirectAttributes.addFlashAttribute("error", "Class or Lecturer information is missing.");
-            return "redirect:/attendances/create";
+    public String create(@RequestParam("classId") Long classId, Model model) {
+        // Validate classId
+        if (classId == null) {
+            return "redirect:/error"; // Redirect to an error page or handle as needed
         }
 
+        // Fetch class and check its existence
+        Optional<Classes> optionalClass = classesService.findById(classId);
+        if (!optionalClass.isPresent()) {
+            return "redirect:/attendances"; // Redirect to attendances list if class not found
+        }
+
+        // Create a new Attendance object
+        model.addAttribute("attendance", new Attendance());
+        model.addAttribute("classId", classId);
+        model.addAttribute("classes", classesService.findAll()); // Optional, if needed
+        model.addAttribute("lecturers", lecturerService.findAll()); // Fetch and add lecturers
+
+        return "attendance/create"; // Ensure this matches the view template location
+    }
+
+
+    @PostMapping("/save")
+    public String createSave(@ModelAttribute("attendance") Attendance attendance,
+                             @RequestParam("lecturerId") Long lecturerId,
+                             @RequestParam("classId") Long classId,
+                             RedirectAttributes redirectAttributes) {
+
+        Lecturer lecturer = lecturerService.findById(lecturerId).orElse(null);
+        if (lecturer == null) {
+            redirectAttributes.addFlashAttribute("error", "Lecturer not found.");
+            return "redirect:/attendances/create?classId=" + classId;
+        }
+        attendance.setLecturer(lecturer);
+
+        Classes classes = classesService.findById(classId).orElse(null);
+        if (classes == null) {
+            redirectAttributes.addFlashAttribute("error", "Class not found.");
+            return "redirect:/attendances/create?classId=" + classId;
+        }
+        attendance.setClasses(classes);
+
         attendanceService.saveAttendance(
-                attendance.getAClasses().getClassId(),
+                attendance.getClasses().getClassId(),
                 attendance.getLecturer().getLecturerId(),
                 attendance.getContent()
         );
+
         redirectAttributes.addFlashAttribute("message", "Create new attendance successfully");
-        return "redirect:/attendances";
+        return "redirect:/attendances?classId=" + classId; // Redirect to list view with classId
     }
+
+
+
+
+
 
 //    @GetMapping("{id}/view")
 //    public ModelAndView viewAttendance(@PathVariable("id") Long id) {

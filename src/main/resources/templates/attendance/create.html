@@ -1,26 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
     <title>Create Attendance</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h1>Create Attendance</h1>
-<form th:action="@{/attendances/save}" th:object="${attendance}" method="post">
-    <label for="classId">Class:</label>
-    <select id="classId" name="aClasses.classId" required>
-        <option th:each="cls : ${classes}" th:value="${cls.getClassId()}" th:text="${cls.getClassName()}"></option>
-    </select><br>
+<div class="container mt-5">
+    <h1>Create Attendance</h1>
 
-    <label for="lecturerId">Lecturer:</label>
-    <select id="lecturerId" name="lecturer.lecturerId" required>
-        <option th:each="lecturer : ${lecturers}" th:value="${lecturer.getLecturerId()}" th:text="${lecturer.getLecturerUser().getFullName()}"></option>
-    </select><br>
+    <!-- Attendance creation form -->
+    <form th:action="@{/attendances/save}" th:object="${attendance}" method="post">
 
-    <label for="content">Content:</label>
-    <textarea id="content" name="content" rows="4" cols="50" required></textarea><br>
+        <!-- Hidden field for classId -->
+        <input type="hidden" name="classId" th:value="${classId}"/>
 
-    <button type="submit">Save</button>
-</form>
-<a href="/attendances">Back to List</a>
+        <!-- Lecturer selection -->
+        <div class="mb-3">
+            <label for="lecturerId" class="form-label">Lecturer:</label>
+            <select id="lecturerId" name="lecturerId" class="form-select" required>
+                <option value="">-- Select Lecturer --</option>
+                <option th:each="lecturer : ${lecturers}"
+                        th:value="${lecturer.getLecturerId()}"
+                        th:text="${lecturer.getLecturerUser().getFullName()}"></option>
+            </select>
+        </div>
+
+        <!-- Log content -->
+        <div class="mb-3">
+            <label for="content" class="form-label">Content:</label>
+            <textarea id="content" name="content" class="form-control" rows="4" required></textarea>
+        </div>
+
+        <!-- Submit button -->
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+
+    <!-- Link to go back to the list -->
+    <div class="mt-3">
+        <a th:href="@{/attendances(classId=${classId})}" class="btn btn-secondary">Back to Class</a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

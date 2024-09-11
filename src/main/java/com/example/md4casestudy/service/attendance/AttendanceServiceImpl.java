@@ -1,6 +1,5 @@
 package com.example.md4casestudy.service.attendance;
 
-
 import com.example.md4casestudy.model.Attendance;
 import com.example.md4casestudy.model.Classes;
 import com.example.md4casestudy.model.Lecturer;
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -25,7 +25,6 @@ public class AttendanceServiceImpl implements IAttendanceService {
     @Autowired
     private ILecturerRepository ilecturerRepository;
 
-
     @Override
     public void saveAttendance(Long classId, Long lecturerId, String content) {
         if (classId == null || lecturerId == null) {
@@ -39,12 +38,17 @@ public class AttendanceServiceImpl implements IAttendanceService {
                 .orElseThrow(() -> new RuntimeException("Lecturer not found with id: " + lecturerId));
 
         Attendance attendance = new Attendance();
-        attendance.setAClasses(classes);
+        attendance.setClasses(classes);
         attendance.setLecturer(lecturer);
         attendance.setDate(LocalDate.now());
         attendance.setContent(content);
 
         attendanceRepository.save(attendance);
+    }
+
+    @Override
+    public List<Attendance> findByClassId(Long classId) {
+        return attendanceRepository.findByClasses_ClassId(classId);
     }
 
     @Override
@@ -54,7 +58,7 @@ public class AttendanceServiceImpl implements IAttendanceService {
 
     @Override
     public void save(Attendance attendance) {
-
+        attendanceRepository.save(attendance);
     }
 
     @Override
@@ -64,6 +68,6 @@ public class AttendanceServiceImpl implements IAttendanceService {
 
     @Override
     public void remove(Long id) {
-
+        attendanceRepository.deleteById(id);
     }
 }

@@ -23,6 +23,7 @@
             <td th:text="${cls.lecturer.lecturerUser.getFullName()}"></td>
             <td>
                 <a th:href="@{/classes/students(classId=${cls.classId})}" class="btn btn-primary">Xem học viên</a>
+                <a th:href="@{/attendances(classId=${cls.classId})}" class="btn btn-primary">Xem nhật ký</a>
             </td>
 
         </tr>

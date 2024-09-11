@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Diaries</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Nhật ký học viên</h1>
+
+    <!-- Nút để tạo nhật ký mới -->
+    <a th:href="@{/student-diaries/create/{studentId}(studentId=${studentId})}" class="btn btn-primary mb-3">Create New Diary</a>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Log ID</th>
+            <th>Date</th>
+            <th>Lecturer</th>
+            <th>Content</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="diary : ${studentDiaries}">
+            <td th:text="${diary.logId}"></td>
+            <td th:text="${diary.date}"></td>
+            <td th:text="${diary.lecturer.lecturerUser.fullName}"></td>
+            <td th:text="${diary.content}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/students/{id}/view(id=${studentId})}" class="btn btn-secondary">Back to Student</a>
+</div>
+</body>
+</html>

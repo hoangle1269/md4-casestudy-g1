@@ -4,13 +4,13 @@
     <title>Attendance List</title>
 </head>
 <body>
-<h1>Attendance List</h1>
+<h1>Nhật Ký của lớp </h1>
 <table>
     <thead>
     <tr>
         <th>ID</th>
         <th>Date</th>
-        <th>Class</th>
+
         <th>Lecturer</th>
         <th>Content</th>
         <th>Actions</th>
@@ -18,17 +18,14 @@
     </thead>
     <tbody>
     <tr th:each="attendance : ${attendances}">
-        <td th:text="${attendance.logId}"></td>
-        <td th:text="${attendance.date}"></td>
-        <td th:text="${attendance.getAClasses().getClassName()}"></td>
+        <td th:text="${attendance.getLogId()}"></td>
+        <td th:text="${attendance.getDate()}"></td>
         <td th:text="${attendance.getLecturer().getLecturerUser().getFullName()}"></td>
         <td th:text="${attendance.content}"></td>
-<!--        <td>-->
-<!--            <a th:href="@{/attendances/{id}/view(id=${attendance.logId})}">View</a>-->
-<!--        </td>-->
+
     </tr>
     </tbody>
 </table>
-<a href="/attendances/create">Create New Attendance</a>
+<a th:href="@{/attendances/create(classId=${classId})}">Create New Attendance</a>
 </body>
 </html>
