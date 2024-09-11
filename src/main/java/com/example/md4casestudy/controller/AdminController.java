@@ -1,6 +1,6 @@
 package com.example.md4casestudy.controller;
 
-import com.example.md4casestudy.model.Class;
+import com.example.md4casestudy.model.Classes;
 import com.example.md4casestudy.model.ENUM.ROLE;
 import com.example.md4casestudy.model.User;
 import com.example.md4casestudy.model.dto.ClassAverageGradeDTO;
@@ -34,7 +34,14 @@ public class AdminController {
     @GetMapping
     public String homePage(Model model) {
         List<TeacherStudentCountDTO> teacherStudentCountDTO = userRepository.findTeacherStudentCounts();
-        model.addAttribute("teacherStudentCountDTO", teacherStudentCountDTO);
+        List<TeacherStudentCountDTO> teacherStudentCount = new ArrayList<TeacherStudentCountDTO>();
+        for (TeacherStudentCountDTO teacherStudentCountDTO1 : teacherStudentCountDTO) {
+            if (teacherStudentCountDTO1.getClassName() != null) {
+                teacherStudentCount.add(teacherStudentCountDTO1);
+            }
+        }
+        model.addAttribute("teacherStudentCountDTO", teacherStudentCount);
+        model.addAttribute("teacher", teacherStudentCountDTO);
         return "adminPages/index";
     }
 
@@ -43,7 +50,7 @@ public class AdminController {
         List<ClassAverageGradeDTO> classAverageGradeDTO = gradesRepository.findAverageGradesByClass();
         List<String> classNames = new ArrayList<String>();
         List<Double> averageGrades = new ArrayList<Double>();
-        List<Class> classes = new ArrayList<Class>();
+        List<Classes> classes = new ArrayList<Classes>();
         for (ClassAverageGradeDTO averageGradeDTO : classAverageGradeDTO) {
             classNames.add(averageGradeDTO.getClassName().getClassName());
             averageGrades.add(averageGradeDTO.getAvgGrade());
@@ -78,7 +85,7 @@ public class AdminController {
         List<StudentAverageGradeDTO> studentAverageGradeDTO = gradesRepository.findAverageGradesByClassId(id);
         List<String> studentNames = new ArrayList<String>();
         List<Double> averageGrades = new ArrayList<Double>();
-        List<Class> classes = new ArrayList<Class>();
+        List<Classes> classes = new ArrayList<Classes>();
         for (ClassAverageGradeDTO averageGradeDTO : classAverageGradeDTO) {
             classes.add(averageGradeDTO.getClassName());
         }

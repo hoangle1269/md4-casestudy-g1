@@ -1,14 +1,14 @@
 package com.example.md4casestudy.model.dto;
 
-import com.example.md4casestudy.model.Class;
+import com.example.md4casestudy.model.Classes;
 import lombok.Data;
 
 @Data
 public class ClassAverageGradeDTO {
-    private Class className;
+    private Classes className;
     private Double avgGrade;
 
-    public ClassAverageGradeDTO(Class className, Double avgGrade) {
+    public ClassAverageGradeDTO(Classes className, Double avgGrade) {
         this.className = className;
         this.avgGrade = avgGrade;
     }

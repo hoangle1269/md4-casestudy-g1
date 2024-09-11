@@ -1,27 +1,25 @@
 package com.example.md4casestudy.model.dto;
 
-import com.example.md4casestudy.model.Class;
-import com.example.md4casestudy.model.Grades;
-import com.example.md4casestudy.model.Student;
+import com.example.md4casestudy.model.Classes;
 import com.example.md4casestudy.model.User;
 
 public class StudentAverageGradeDTO {
 
-    private Class classes;
+    private Classes classes;
     private User students;
     private Double averageGrade;
 
-    public StudentAverageGradeDTO(Class classes, User students, Double averageGrade) {
+    public StudentAverageGradeDTO(Classes classes, User students, Double averageGrade) {
         this.classes = classes;
         this.students = students;
         this.averageGrade = averageGrade;
     }
 
-    public Class getClasses() {
+    public Classes getClasses() {
         return classes;
     }
 
-    public void setClasses(Class classes) {
+    public void setClasses(Classes classes) {
         this.classes = classes;
     }
 
