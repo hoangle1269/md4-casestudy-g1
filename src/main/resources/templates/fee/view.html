@@ -18,10 +18,26 @@
         </thead>
         <tbody>
         <tr th:each="fee : ${fees}">
-<!--            <td th:text="${fee.getFeeId()}">Fee ID</td>-->
             <td th:text="${fee.amount}">Amount</td>
             <td th:text="${fee.status}">Status</td>
             <td th:text="${fee.dueDate}">Due Date</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="container mt-4">
+    <h1>Student payment history</h1>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Payment Date</th>
+            <th>Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="payment : ${payments}">
+            <td th:text="${payment.paymentDate}">Date</td>
+            <td th:text="${payment.paymentAmount}">Amount</td>
         </tr>
         </tbody>
     </table>
