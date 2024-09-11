@@ -20,7 +20,7 @@ public class Student {
 
     @ManyToOne
     @JoinColumn(name = "classid")
-    private Class className;
+    private Classes className;
     @NotNull
     private String status;
 }
