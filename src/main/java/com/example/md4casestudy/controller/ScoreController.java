@@ -14,7 +14,6 @@ import java.util.List;
 public class ScoreController {
     @Autowired
     private IScoreService scoreService;
-
     @GetMapping("/student/{studentId}/scores")
     public String getScoresByStudentId(@PathVariable("studentId") Long studentId, Model model) {
         List<ScoreDTO> scores = scoreService.getScoresByStudentId(studentId);

@@ -6,6 +6,7 @@ import com.example.md4casestudy.model.StudentStatus;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Set;
 @Data
 public class StudentDTO {
@@ -14,7 +15,7 @@ public class StudentDTO {
     private String email;
     private String phoneNumber;
     private String address;
-    private LocalDate dateOfBirth;
+    private Date dateOfBirth;
     private StudentStatus status;
     private Long classId;
     private Set<Long> scoreIds;

@@ -2,7 +2,6 @@ package com.example.md4casestudy.service.implFee;
 
 
 import com.example.md4casestudy.model.DTO.ScoreDTO;
-import com.example.md4casestudy.model.Score;
 import com.example.md4casestudy.repository.IScoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
