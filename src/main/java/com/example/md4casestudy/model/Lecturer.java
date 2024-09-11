@@ -7,14 +7,14 @@ import java.util.Date;
 
 @Entity
 @Data
-@Table(name = "lecturer")
+@Table(name = "lecturers")
 public class Lecturer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long lecturerId;
 
-    @Column(unique = true, nullable = false)//Có giá trị duy nhất ko trùng lặp và ko null
+    @Column(unique = true, nullable = false)
     private String email;
 
     private String password;

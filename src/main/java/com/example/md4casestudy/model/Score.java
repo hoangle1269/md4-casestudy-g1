@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 //Chứa thông tin về điểm số của học viên.
 @Entity
 @Data
-@Table(name = "score")
+@Table(name = "scores")
 public class Score {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,8 +22,8 @@ public class Score {
     @JoinColumn(name = "subject_id", nullable = false)
     private Subject subject;
 
-    private BigDecimal theoryGrade;//diem ly thuyet,số thục  giong double
-    private BigDecimal practicalGrade;//diem thuc hanh
+    private BigDecimal theoryScore;
+    private BigDecimal practicalScore;
 
 
 }

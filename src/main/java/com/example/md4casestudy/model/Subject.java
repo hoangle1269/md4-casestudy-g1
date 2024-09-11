@@ -6,7 +6,7 @@ import lombok.Data;
 //Chứa thông tin về các môn học.
 @Entity
 @Data
-@Table(name = "subject")
+@Table(name = "subjects")
 public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
