@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách học viên</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Danh sách học viên lớp <span th:text="${class.className}"></span></h1>
+    <form method="get" th:action="@{/classes/students}">
+        <input type="hidden" name="classId" th:value="${class.classId}"/>
+        <div class="form-group">
+            <label for="status">Trạng thái học viên:</label>
+            <select id="status" name="status" class="form-control">
+                <option value="" selected>Chọn trạng thái</option>
+                <option th:value="DROP_OUT" th:text="DROP_OUT"></option>
+                <option th:value="SUSPEND" th:text="SUSPEND"></option>
+                <option th:value="'WAITING_FOR_CLASS_CHANGE'" th:text="WAITING_FOR_CLASS_CHANGE"></option>
+                <option th:value="'STUDYING'" th:text="STUDYING"></option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Lọc</button>
+    </form>
+    <h3>Tổng số học viên: <span th:text="${totalStudents}"></span></h3>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID Học viên</th>
+            <th>Họ tên</th>
+            <th>Email</th>
+            <th>Số điện thoại</th>
+            <th>Trạng thái</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="student : ${students}">
+            <td th:text="${student.studentId}"></td>
+            <td th:text="${student.studentUser.fullName}"></td>
+            <td th:text="${student.studentUser.email}"></td>
+            <td th:text="${student.studentUser.phoneNumber}"></td>
+            <td th:text="${student.status}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

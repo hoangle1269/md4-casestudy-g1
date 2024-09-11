@@ -1,5 +1,6 @@
 package com.example.md4casestudy.service.student;
 
+import com.example.md4casestudy.model.ENUM.STUDENT_STATUS;
 import com.example.md4casestudy.model.Student;
 import com.example.md4casestudy.repository.IStudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,4 +42,18 @@ private IStudentRepository iStudentRepository;
     public List<Student> findAllByClassName(String className) {
         return iStudentRepository.findAllByClasses_ClassName(className);
     }
+
+    @Override
+    public List<Student> findByClassId(Long classId) {
+        return iStudentRepository.findByClasses_ClassId(classId);
+    }
+
+
+
+    @Override
+    public List<Student> findStudentsByClassIdAndStatus(Long classId, STUDENT_STATUS status) {
+        return iStudentRepository.findByClasses_ClassIdAndStatus(classId, status);
+    }
+
+
 }

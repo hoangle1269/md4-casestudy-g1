@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách lớp học</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1>Danh sách lớp học</h1>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID Lớp</th>
+            <th>Tên lớp</th>
+            <th>Giảng viên</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cls : ${classes}">
+            <td th:text="${cls.classId}"></td>
+            <td th:text="${cls.className}"></td>
+            <td th:text="${cls.lecturer.lecturerUser.getFullName()}"></td>
+            <td>
+                <a th:href="@{/classes/students(classId=${cls.classId})}" class="btn btn-primary">Xem học viên</a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
