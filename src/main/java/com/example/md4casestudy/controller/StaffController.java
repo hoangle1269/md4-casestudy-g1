@@ -1,26 +1,24 @@
 package com.example.md4casestudy.controller;
 
 
-import com.example.md4casestudy.model.ENUM.ROLE;
 import com.example.md4casestudy.model.Grades;
 import com.example.md4casestudy.model.Student;
-import com.example.md4casestudy.model.User;
+import com.example.md4casestudy.model.Subject;
 import com.example.md4casestudy.model.dto.*;
 import com.example.md4casestudy.repository.GradeRepository;
 import com.example.md4casestudy.repository.StaffRepository;
 import com.example.md4casestudy.repository.UserRepository;
 import com.example.md4casestudy.service.appUser.AppUserService;
-import com.example.md4casestudy.service.gradeService.GradeService;
+import com.example.md4casestudy.service.grade.GradeService;
 import com.example.md4casestudy.service.student.StudentService;
+import com.example.md4casestudy.service.subject.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/staff")
@@ -37,6 +35,8 @@ public class StaffController {
     GradeService gradeService;
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private SubjectService subjectService;
 
     @GetMapping
     public String homePage(Model model) {
@@ -69,7 +69,7 @@ public class StaffController {
         return "staffPages/index";
     }
 
-    @GetMapping("/add/{idStudent}/{idGrade}")
+    @GetMapping("/edit/{idStudent}/{idGrade}")
     public String addStaff(@PathVariable("idStudent") Long idStudent,
                            @PathVariable("idGrade") Long idGrade,
                            Model model) {
@@ -91,6 +91,8 @@ public class StaffController {
             gradeService.updateGrades(grades);
         }
         List<ClassStudentGradeDTO> classAverageGradeDTO = staffRepository.findClassStudentGradeDetailsByStudentId(idStudent);
+        Student student = studentService.findById(idStudent);
+        model.addAttribute("studentInformation", student);
         model.addAttribute("classAverageGradeDTO", classAverageGradeDTO);
         return "staffPages/index";
     }
@@ -99,8 +101,8 @@ public class StaffController {
     public String deleteGrade(@PathVariable("idGrade") Long idGrade, @PathVariable("idStudent") Long idStudent, Model model) {
         gradeService.remove(idGrade);
         List<ClassStudentGradeDTO> classAverageGradeDTO = staffRepository.findClassStudentGradeDetailsByStudentId(idStudent);
-        Student student = studentService.findById(idStudent);
-        model.addAttribute("studentss", student);
+        Student students = studentService.findById(idStudent);
+        model.addAttribute("studentInformation", students);
         model.addAttribute("classAverageGradeDTO", classAverageGradeDTO);
         return "staffPages/index";
     }
@@ -122,6 +124,30 @@ public class StaffController {
         model.addAttribute("studentInformation", students);
         model.addAttribute("classAverageGradeDTO", classAverageGradeDTO);
         return "staffPages/index";
+    }
+
+    @GetMapping("/addGrade/{idStudent}")
+    public String addGrade(@PathVariable("idStudent") Long idStudent, Model model) {
+        List<Subject> subjects = subjectService.getAllSubjects();
+        Grades grades = new Grades();
+        model.addAttribute("subjects", subjects);
+        model.addAttribute("grade", grades);
+        model.addAttribute("idStudent", idStudent);
+        return "staffPages/forms/addGrade";
+    }
+
+    @PostMapping("/add/{idStudent}")
+    public String addGradePost(@PathVariable("idStudent") Long idStudent, @ModelAttribute Grades grades, Model model) {
+        Student student = studentService.findById(idStudent);
+        grades.setStudent(student);
+        grades.setAverageGrade((grades.getTheoryGrade() + grades.getPracticalGrade()) / 2);
+        gradeService.save(grades);
+        List<ClassStudentGradeDTO> classAverageGradeDTO = staffRepository.findClassStudentGradeDetailsByStudentId(idStudent);
+        Student students = studentService.findById(idStudent);
+        model.addAttribute("studentInformation", students);
+        model.addAttribute("classAverageGradeDTO", classAverageGradeDTO);
+        return "staffPages/index";
+
     }
 
     @GetMapping("/reports")

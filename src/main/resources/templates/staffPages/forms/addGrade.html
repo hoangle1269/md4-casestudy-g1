@@ -215,89 +215,37 @@
                     </li>
                 </ul>
             </nav>
-            <!--                         partial-->
-            <!--                        <div class="col-12 grid-margin stretch-card">-->
-            <!--                            <div class="card">-->
-            <!--                                <div class="card-body">-->
-            <!--                                    <div>-->
-            <!--                                        <h2 class="card-title">Edit-->
-            <!--                                            information</h2>-->
-            <!--                                        <form class="forms-sample"-->
-            <!--                                              th:action="@{/staff/update/{idGrade}/{idStudent} (idGrade=${grade.gradeId},idStudent = ${classStudentGradeDTO.studentName.studentId} )}"-->
-            <!--                                              th:object="${grade}"-->
-            <!--                                              method="post">-->
-            <!--                                            <div class="form-group mb-6">-->
-            <!--                                                <h4 class="text-danger"-->
-            <!--                                                    th:text="'First name: ' + ${classStudentGradeDTO.studentName.user.fullName}"></h4>-->
-            <!--                                            </div>-->
-            <!--                                            <div class="form-group mb-6">-->
-            <!--                                                <h4 class="text-danger"-->
-            <!--                                                    th:text="'Subject: ' + ${classStudentGradeDTO.subjectName.subjectName}"></h4>-->
-            <!--                                            </div>-->
-            <!--                                            <div class="form-group mb-3">-->
-            <!--                                                <h5 class="text-danger">Theory</h5>-->
-            <!--                                                <input class="form-control fs-5 " type="text"-->
-            <!--                                                       id="phoneNumber"-->
-            <!--                                                       name="theoryGrade"-->
-            <!--                                                       th:field="*{theoryGrade}">-->
-            <!--                                            </div>-->
 
-            <!--                                            <div class="form-group mb-6">-->
-            <!--                                                <h5 class="text-danger">Practise</h5>-->
-            <!--                                                <input class="form-control fs-5" type="text" id="fullName"-->
-            <!--                                                       name="practicalGrade"-->
-            <!--                                                       th:field="*{practicalGrade}">-->
-
-            <!--                                            </div>-->
-            <!--                                            <div class="form-check form-check-flat form-check-primary mb-6">-->
-            <!--                                                <label class="form-check-label">-->
-            <!--                                                    <input type="checkbox" class="form-check-input">-->
-            <!--                                                    Remember me-->
-            <!--                                                </label>-->
-            <!--                                            </div>-->
-            <!--                                            <button type="submit" class="btn btn-primary me-2">Submit-->
-            <!--                                            </button>-->
-            <!--                                            <a href="/admin/moreInfo" class="btn btn-light">Cancel</a>-->
-            <!--                                        </form>-->
-            <!--                                    </div>-->
-            <!--                                </div>-->
-            <!--                            </div>-->
-            <!--                        </div>-->
-
-
-            <!--            <div class="container">-->
+            <!--            add-->
             <div class="main-panel">
                 <div class="content-wrapper">
                     <div class="row">
-
-                        <!--                        <div th:if="${classStudentGradeDTO != null}">-->
                         <div class="col-md-6 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body">
-                                    <h2 class="card-title" style="text-align: center;color: blue;font-size: 1.5rem">Edit
-                                        grade</h2>
+                                    <h2 class="card-title" style="text-align: center;color: blue;font-size: 1.5rem">Add grade</h2>
                                     <form class="forms-sample"
-                                          th:action="@{/staff/update/{idGrade}/{idStudent} (idGrade=${grade.gradeId},idStudent = ${classStudentGradeDTO.studentName.studentId} )}"
+                                          th:action="@{/staff/add/{idStudent} (idStudent = ${idStudent} )}"
                                           th:object="${grade}"
                                           method="post">
                                         <div class="form-group">
-                                            <h4 class=" card-title"
-                                                th:text="'First name: ' + ${classStudentGradeDTO.studentName.user.fullName}"></h4>
+                                            <label for="subjects" class="form-label">subjects</label>
+                                            <select id="subjects" th:field="*{subject}" class="form-select">
+                                                <option class="forms-sample text-dark" th:each="subject : ${subjects}"
+                                                        th:value="${subject.subjectId}"
+                                                        th:text="${subject.subjectName}"></option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
-                                            <h4 class=" card-title"
-                                                th:text="'Subject: ' + ${classStudentGradeDTO.subjectName.subjectName}"></h4>
-                                        </div>
-                                        <div class="form-group">
-                                            <h5 class=" card-title">Theory</h5>
+                                            <label for="Theory" class="form-label">Theory</label>
                                             <input class="form-control fs-5 " type="text"
-                                                   id="phoneNumber"
+                                                   id="Theory"
                                                    name="theoryGrade"
                                                    th:field="*{theoryGrade}">
                                         </div>
                                         <div class="form-group">
-                                            <h5 class=" card-title">Practise</h5>
-                                            <input class="form-control fs-5" type="text" id="fullName"
+                                            <label for="Practise" class="form-label">Practise</label>
+                                            <input class="form-control fs-5" type="text" id="Practise"
                                                    name="practicalGrade"
                                                    th:field="*{practicalGrade}">
                                         </div>
@@ -315,7 +263,8 @@
                         <div class="col-md-6 grid-margin stretch-card">
                             <div class="card">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%"
-                                     viewBox="0 0 731.67004 550.61784" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                     viewBox="0 0 731.67004 550.61784"
+                                     xmlns:xlink="http://www.w3.org/1999/xlink">
                                     <path d="M0,334.13393c0,.66003,.53003,1.19,1.19006,1.19H730.48004c.65997,0,1.19-.52997,1.19-1.19,0-.65997-.53003-1.19-1.19-1.19H1.19006c-.66003,0-1.19006,.53003-1.19006,1.19Z"
                                           fill="#3f3d56"></path>
                                     <polygon
@@ -396,20 +345,20 @@
                                 </svg>
                             </div>
                         </div>
-                        <!--                        </div>-->
                     </div>
                 </div>
-                <!--                </div>-->
             </div>
-            <footer class="footer">
-                <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                    <span class="float-none float-sm-end d-block mt-1 mt-sm-0 text-center">Copyright © 2024. All rights reserved.</span>
-                </div>
-            </footer>
-            <!-- partial -->
         </div>
-        <!-- main-panel ends -->
+
+        <footer class="footer">
+            <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                <span class="float-none float-sm-end d-block mt-1 mt-sm-0 text-center">Copyright © 2024. All rights reserved.</span>
+            </div>
+        </footer>
+        <!-- partial -->
     </div>
+    <!-- main-panel ends -->
+</div>
 </div>
 <!-- page-body-wrapper ends -->
 </div>

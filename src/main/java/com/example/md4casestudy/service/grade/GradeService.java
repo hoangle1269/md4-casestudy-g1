@@ -1,4 +1,4 @@
-package com.example.md4casestudy.service.gradeService;
+package com.example.md4casestudy.service.grade;
 
 import com.example.md4casestudy.model.Grades;
 import com.example.md4casestudy.repository.GradeRepository;
@@ -25,7 +25,7 @@ public class GradeService implements IGradeService {
 
     @Override
     public void save(Grades grades) {
-
+        gradeRepository.save(grades);
     }
 
     @Override
