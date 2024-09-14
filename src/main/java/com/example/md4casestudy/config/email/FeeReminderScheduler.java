@@ -29,15 +29,15 @@ public class FeeReminderScheduler {
     java.sql.Date sqlDate1 = java.sql.Date.valueOf(formattedDate1);
     java.sql.Date sqlDate2 = java.sql.Date.valueOf(formattedDate2);
 
-    @Scheduled(cron = "0 */2 * * * *")
+    //    @Scheduled(cron = "0 */2 * * * *")
     public void checkFeesAndSendReminders() {
         List<Fee> feesDueSoon = feeRepository.findFeesDueSoon(sqlDate2, sqlDate1);
         for (Fee fee : feesDueSoon) {
-            if (fee.getStatus().equals(FEE_STATUS.NOT_SUBMITTED.getRoleName())){
-                String email = fee.getStudent().getUser().getEmail();
-                String subject = "Hạn nộp học phí sắp đến!";
-                String text = String.format("Chào %s, hạn nộp học phí của bạn là ngày %s. Vui lòng thanh toán trước ngày đó để tránh bị phạt.",
-                        fee.getStudent().getUser().getFullName(), fee.getDueDate().toString());
+            if (fee.getStatus().equals(FEE_STATUS.NOT_SUBMITTED.getRoleName())) {
+                String email = fee.getStudent().getStudentUser().getEmail();
+                String subject = "Your tuition is due!";
+                String text = String.format("Hello %s, your tuition due is %s. Please submit your tuition before its due.",
+                        fee.getStudent().getStudentUser().getFullName(), fee.getDueDate().toString());
                 emailService.sendFeeReminderEmail(email, subject, text);
             }
         }

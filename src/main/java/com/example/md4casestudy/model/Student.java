@@ -15,14 +15,8 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long studentId;
 
-    private String fullName;
-    private String email;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    private String phoneNumber;
+    @OneToOne(cascade = CascadeType.ALL)
+    private User studentUser;
 
     @Enumerated(EnumType.STRING)
     private STUDENT_STATUS status;

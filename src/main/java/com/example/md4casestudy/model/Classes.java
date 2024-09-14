@@ -3,6 +3,7 @@ package com.example.md4casestudy.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 
@@ -25,5 +26,19 @@ public class Classes {
 
     @OneToMany(mappedBy = "classes")
     private Set<Student> students; // Thêm liên kết đến học viên
+
+    @Column(name = "date", nullable = false)
+    private LocalDate date = LocalDate.now();
+
+    private String content;
+
+    @Override
+    public String toString() {
+        return "Class{" +
+                "classId=" + classId +
+                ", className='" + className + '\'' +
+                ", lecturer=" + lecturer +
+                '}';
+    }
 
 }

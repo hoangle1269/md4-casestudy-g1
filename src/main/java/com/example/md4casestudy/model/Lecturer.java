@@ -14,14 +14,7 @@ public class Lecturer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long lecturerId;
 
-    @Column(unique = true, nullable = false)
-    private String email;
-
-    private String password;
-    private String phoneNumber;
-    private String fullName;
-    private Date dateOfBirth;
-    private String address;
-    private String identity;
+    @OneToOne(cascade = CascadeType.ALL)
+    private User lecturerUser;
 
 }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Attendance List</title>
+</head>
+<body>
+<h1>Nhật Ký của lớp </h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Date</th>
+
+        <th>Lecturer</th>
+        <th>Content</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="attendance : ${attendances}">
+        <td th:text="${attendance.getLogId()}"></td>
+        <td th:text="${attendance.getDate()}"></td>
+        <td th:text="${attendance.getLecturer().getLecturerUser().getFullName()}"></td>
+        <td th:text="${attendance.content}"></td>
+
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/attendances/create(classId=${classId})}">Create New Attendance</a>
+</body>
+</html>

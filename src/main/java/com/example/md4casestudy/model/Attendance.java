@@ -16,7 +16,7 @@ public class Attendance {
 
     @ManyToOne
     @JoinColumn(name = "class_id", nullable = false)
-    private Classes aClasses;
+    private Classes classes;
 
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)

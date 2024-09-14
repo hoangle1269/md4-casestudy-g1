@@ -1,54 +1,61 @@
 package com.example.md4casestudy.controller;
 
-import com.example.md4casestudy.model.ENUM.STUDENT_STATUS;
-import com.example.md4casestudy.model.Score;
+import com.example.md4casestudy.model.Classes;
 import com.example.md4casestudy.model.Student;
-import com.example.md4casestudy.service.ScoreService;
-import com.example.md4casestudy.service.StudentService;
+import com.example.md4casestudy.model.User;
+import com.example.md4casestudy.model.dto.ClassAverageGradeDTO;
+import com.example.md4casestudy.model.dto.StudentAverageGradeDTO;
+import com.example.md4casestudy.model.dto.TeacherStudentCountDTO;
+import com.example.md4casestudy.repository.GradeRepository;
+import com.example.md4casestudy.repository.UserRepository;
+import com.example.md4casestudy.service.appUser.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/staff")
 public class StaffController {
-
     @Autowired
-    private ScoreService scoreService;
-
+    AppUserService userService;
     @Autowired
-    private StudentService studentService;
+    private UserRepository userRepository;
+    @Autowired
+    private GradeRepository gradesRepository;
+
     @GetMapping
-    public String home (){
-        return "staff/home";
-    }
-
-    @GetMapping("/students")
-    public String viewStudentList( Model model) {
-
-//        List<Student> students = studentService.getAllStudentsByClass(classId);
-        List<Student> students = studentService.getAllStudents();  // Using service method to fetch students from DB
-        model.addAttribute("students", students);
-        model.addAttribute("statuses", STUDENT_STATUS.values());
-        return "staff/students";
-    }
-
-
-    @PostMapping("/students/update-status")
-    public String updateStudentStatus(@RequestParam("studentId") Long studentId,
-                                      @RequestParam("status") STUDENT_STATUS newStatus) {
-        Optional<Student> studentOptional = studentService.findById(studentId);
-        if (studentOptional.isPresent()) {
-            Student student = studentOptional.get();
-            studentService.updateStatus(studentId, newStatus);
+    public String homePage(Model model) {
+        List<TeacherStudentCountDTO> teacherStudentCountDTO = userRepository.findTeacherStudentCounts();
+        List<TeacherStudentCountDTO> teacherStudentCount = new ArrayList<TeacherStudentCountDTO>();
+        for (TeacherStudentCountDTO teacherStudentCountDTO1 : teacherStudentCountDTO) {
+            if (teacherStudentCountDTO1.getClassName() != null) {
+                teacherStudentCount.add(teacherStudentCountDTO1);
+            }
         }
-        return "redirect:/staff/students";
+        model.addAttribute("teacherStudentCountDTO", teacherStudentCount);
+        model.addAttribute("teacher", teacherStudentCountDTO);
+        return "staffPages/index";
+    }
+    @GetMapping("/studentList/{id}")
+
+    public String checkFeesAndSendReminders(Model model, @PathVariable long id) {
+        List<StudentAverageGradeDTO> studentAverageGradeDTO = gradesRepository.findAverageGradesByClassId(id);
+        List<User> student = new ArrayList<User>();
+        for (StudentAverageGradeDTO studentAverageGrade : studentAverageGradeDTO) {
+            student.add(studentAverageGrade.getStudents());
+        }
+        model.addAttribute("student", student);
+        return "staffPages/index";
     }
 
-
+    @GetMapping("/reports")
+    public String staffReports() {
+        return "staff/reports";
+    }
 }

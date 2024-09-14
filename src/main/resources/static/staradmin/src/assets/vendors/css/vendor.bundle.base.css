@@ -8,6 +8,14 @@
   touch-action: auto;
   -ms-touch-action: auto;
 }
+.hover-bg-secondary {
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.hover-bg-secondary:hover {
+  background-color: seagreen;
+  color: #fff;
+}
 
 /*
  * Scrollbar rail styles

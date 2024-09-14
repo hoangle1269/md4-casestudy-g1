@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/layout :: head">
+    <meta charset="UTF-8">
+    <title>Student Details</title>
+</head>
+<body>
+<h1>Student Details</h1>
+
+<div th:if="${student != null}">
+    <p><strong>Id:</strong> <span th:text="${student.getStudentId()}"></span></p>
+    <p><strong>Name:</strong> <span th:text="${student.getStudentUser().getFullName()}"></span></p>
+    <p><strong>Email:</strong> <span th:text="${student.getStudentUser().getEmail()}"></span></p>
+    <p><strong>DateOfBirth:</strong> <span th:text="${student.getStudentUser().getDateOfBirth()}"></span></p>
+    <p><strong>Address:</strong> <span th:text="${student.getStudentUser().getAddress()}"></span></p>
+    <p><strong>PhoneNumber:</strong> <span th:text="${student.getStudentUser().getPhoneNumber()}"></span></p>
+    <p><strong>Status:</strong> <span th:text="${student.getStatus()}"></span></p>
+
+    <p><a th:href="@{/classes/students(classId=${student.getClasses().getClassId()})}" class="btn btn-primary">Back to Class Students</a></p>
+    <p><a th:href="@{/student-diaries/list/{studentId}(studentId=${student.getStudentId()})}" class="btn btn-secondary">View Student Diaries</a></p>
+</div>
+
+<div th:if="${student == null}">
+    <p>Student not found.</p>
+</div>
+
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
