@@ -1,6 +1,7 @@
 package com.example.md4casestudy.service.student;
 
 import com.example.md4casestudy.model.Student;
+import com.example.md4casestudy.model.dto.StudentIdDTO;
 import com.example.md4casestudy.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
@@ -167,5 +168,10 @@ public class StudentService implements StudentRepository {
     @Override
     public Page<Student> findAll(Pageable pageable) {
         return null;
+    }
+
+    @Override
+    public List<StudentIdDTO> listStudent(Long classId) {
+        return studentRepository.listStudent(classId);
     }
 }

@@ -55,11 +55,7 @@ public class StaffController {
     @GetMapping("/studentList/{id}")
 
     public String checkFeesAndSendReminders(Model model, @PathVariable long id) {
-        List<StudentAverageGradeDTO> studentAverageGradeDTO = gradesRepository.findAverageGradesByClassId(id);
-        List<StudentIdDTO> student = new ArrayList<StudentIdDTO>();
-        for (StudentAverageGradeDTO studentAverageGrade : studentAverageGradeDTO) {
-            student.add(new StudentIdDTO(studentAverageGrade.getStudents().getFullName(), studentAverageGrade.getStudents().getEmail(), studentAverageGrade.getStudent().getStudentId()));
-        }
+        List<StudentIdDTO> student = studentService.listStudent(id);
         model.addAttribute("student", student);
         return "staffPages/index";
     }
