@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -187,148 +187,108 @@
         </div>
     </nav>
     <!-- partial -->
-    <div class="container-fluid page-body-wrapper">
-        <!-- partial:../../partials/_sidebar.html -->
-        <nav class="sidebar sidebar-offcanvas" id="sidebar">
-            <ul class="nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin">
-                        <i class="mdi mdi-grid-large menu-icon"></i>
-                        <span class="menu-title">Dashboard</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/moreInfo">
-                        <i class="menu-icon mdi mdi-card-text-outline"></i>
-                        <span class="menu-title">Form elements</span>
+    <div class="main-panel">
 
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/dataClasses">
-                        <i class="menu-icon mdi mdi-card-text-outline"></i>
-                        <span class="menu-title">Charts</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-        <!-- partial -->
-        <div class="main-panel">
-            <div class="content-wrapper">
-                <div class="row">
-                    <div class="col-md-6 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Register a user account</h4>
-                                <form class="forms-sample" th:action="@{/admin/add}" th:object="${user}" method="post">
-                                    <div class="form-group">
-                                        <label for="email">Email address</label>
-                                        <input class="form-control" type="email" id="email" th:field="*{email}"
-                                               placeholder="Email ...">
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial:../../partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin">
+                            <i class="mdi mdi-grid-large menu-icon"></i>
+                            <span class="menu-title">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/moreInfo">
+                            <i class="menu-icon mdi mdi-card-text-outline"></i>
+                            <span class="menu-title">Form elements</span>
 
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                        <input class="form-control" type="password" id="password" th:field="*{password}"
-                                               pattern="[\d]{6,8}" placeholder="Password ...">
-
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="phoneNumber">Phone Number</label>
-                                        <input class="form-control" type="text" id="phoneNumber"
-                                               th:field="*{phoneNumber}" pattern="0+[\d]{10,11}"
-                                               placeholder="Phone Number ...">
-
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="fullName">Full Name</label>
-                                        <input class="form-control" type="text" id="fullName" th:field="*{fullName}"
-                                               pattern="\p{L}{1,15}( \p{L}{1,15}){0,14}" placeholder="Full Name ...">
-
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="dateOfBirth">Birthday</label>
-                                        <input class="form-control" type="date" id="dateOfBirth"
-                                               th:field="*{dateOfBirth}" placeholder="birthday ...">
-
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="address">Address</label>
-                                        <input class="form-control" type="text" id="address" th:field="*{address}"
-                                               pattern="\p{L}{1,15}( \p{L}{1,15}){0,14}"  placeholder="Address ...">
-
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="identity">Identity</label>
-                                        <input class="form-control" type="text" id="identity" th:field="*{identity}"
-                                               pattern="0+[\d]{12}" placeholder="Identity ...">
-
-                                    </div>
-                                    <div>
-                                        <label>
-                                            <select style="width: 109%" th:field="*{role}" class="form-control">
-                                                <option value="" disabled selected>Select Role</option>
-                                                <option th:each="role : ${roles}" th:value="${role.getRoleName()}"
-                                                        th:text="${role.getRoleName()}">Role
-                                                </option>
-                                            </select>
-                                        </label>
-                                    </div>
-                                    <div class="form-check form-check-flat form-check-primary">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input"> Remember me </label>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary me-2">Submit</button>
-                                    <a href="/admin/moreInfo" class="btn btn-light">Cancel</a>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 grid-margin stretch-card">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">More courses</h4>
-                                <form class="forms-sample">
-                                    <div class="form-group row">
-                                        <label for="exampleInputUsername2" class="col-sm-3 col-form-label">Course
-                                            Name</label>
-                                        <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="exampleInputUsername2"
-                                                   placeholder="Course Name...">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="exampleInputEmail2" class="col-sm-3 col-form-label">describe</label>
-                                        <div class="col-sm-9">
-                                            <textarea style="height: 150px" class="form-control" id="exampleInputEmail2"
-                                                   placeholder="Describe..."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label for="exampleInputMobile" class="col-sm-3 col-form-label">Price</label>
-                                        <div class="col-sm-9">
-                                            <input type="number" class="form-control" id="exampleInputMobile"
-                                                   placeholder="Price...">
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary me-2">Submit</button>
-                                    <a href="/admin/moreInfo" class="btn btn-light">Cancel</a>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- content-wrapper ends -->
-            <!-- partial:../../partials/_footer.html -->
-            <footer class="footer">
-                <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                    <span class="float-none float-sm-end d-block mt-1 mt-sm-0 text-center">Copyright © 2024. All rights reserved.</span>
-                </div>
-            </footer>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/dataClasses">
+                            <i class="menu-icon mdi mdi-card-text-outline"></i>
+                            <span class="menu-title">Charts</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
             <!-- partial -->
+            <
+            <div class="main-panel">
+                <div class="container">
+                    <div class="main-panel">
+                        <div class="content-wrapper">
+                            <div class="row">
+                                <div class="content-wrapper">
+                                    <!--                                    <div class="d-flex justify-content-center" style="width: 100%;">-->
+                                    <!--                                        <div class="grid-margin stretch-card" style="width: 60rem;">-->
+                                    <!--                                            <div class="card">-->
+                                    <div class="grid-margin stretch-card">
+                                        <div class="col-lg-12 stretch-card">
+                                            <div class="card">
+                                                <div class="card-body ">
+                                                    <div class="mb-5"><h2 class=" text-primary text-center">Edit
+                                                        information</h2>
+                                                    </div>
+                                                    <form class="forms-sample"
+                                                          th:action="@{/staff/update/{idGrade}/{idStudent} (idGrade=${grade.gradeId},idStudent = ${classStudentGradeDTO.studentName.studentId} )}"
+                                                          th:object="${grade}"
+                                                          method="post">
+                                                        <div class="form-group mb-6">
+                                                            <h4 class="text-danger"
+                                                                th:text="'First name: ' + ${classStudentGradeDTO.studentName.user.fullName}"></h4>
+                                                        </div>
+                                                        <div class="form-group mb-6">
+                                                            <h4 class="text-danger"
+                                                                th:text="'Subject: ' + ${classStudentGradeDTO.subjectName.subjectName}"></h4>
+                                                        </div>
+                                                        <div class="form-group mb-3">
+                                                            <h5 class="text-danger">Theory</h5>
+                                                            <input class="form-control fs-5 " type="text"
+                                                                   id="phoneNumber"
+                                                                   name="theoryGrade"
+                                                                   th:field="*{theoryGrade}">
+                                                        </div>
+
+                                                        <div class="form-group mb-6">
+                                                            <h5 class="text-danger">Practise</h5>
+                                                            <input class="form-control fs-5" type="text" id="fullName"
+                                                                   name="practicalGrade"
+                                                                   th:field="*{practicalGrade}">
+
+                                                        </div>
+                                                        <div class="form-check form-check-flat form-check-primary mb-6">
+                                                            <label class="form-check-label">
+                                                                <input type="checkbox" class="form-check-input">
+                                                                Remember me
+                                                            </label>
+                                                        </div>
+                                                        <button type="submit" class="btn btn-primary me-2">Submit
+                                                        </button>
+                                                        <a href="/admin/moreInfo" class="btn btn-light">Cancel</a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:../../partials/_footer.html -->
+                <footer class="footer">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="float-none float-sm-end d-block mt-1 mt-sm-0 text-center">Copyright © 2024. All rights reserved.</span>
+                    </div>
+                </footer>
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
         </div>
-        <!-- main-panel ends -->
     </div>
     <!-- page-body-wrapper ends -->
 </div>

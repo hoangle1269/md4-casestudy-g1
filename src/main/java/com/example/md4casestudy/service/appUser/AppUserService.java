@@ -1,5 +1,6 @@
 package com.example.md4casestudy.service.appUser;
 
+import com.example.md4casestudy.model.Grades;
 import com.example.md4casestudy.model.User;
 import com.example.md4casestudy.model.UserPrinciple;
 import com.example.md4casestudy.repository.UserRepository;
@@ -24,8 +25,8 @@ public class AppUserService implements IAppUserService {
     }
 
     @Override
-    public Optional<User> findById(Long id) {
-        return appUserRepo.findById(id);
+    public User findById(Long id) {
+        return appUserRepo.findById(id).orElse(null);
     }
 
     @Override
@@ -43,6 +44,11 @@ public class AppUserService implements IAppUserService {
     @Override
     public void remove(Long id) {
         appUserRepo.deleteById(id);
+    }
+
+    @Override
+    public Grades updateGrades(Grades grade) {
+        return null;
     }
 
     @Override
