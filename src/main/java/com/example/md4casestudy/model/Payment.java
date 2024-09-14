@@ -2,7 +2,6 @@ package com.example.md4casestudy.model;
 
 import jakarta.persistence.*;
 
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 @Entity
