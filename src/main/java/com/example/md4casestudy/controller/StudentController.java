@@ -26,31 +26,27 @@ public class StudentController {
     private IStudentService studentService;
 
 
-
-
-
-
-    @GetMapping("/create")
-    public String create(Model model) {
-        model.addAttribute("student",new Student());
-        return "/student/create";
-    }
-
-
-    @PostMapping("/save")
-    public String create(@ModelAttribute("student") Student student,
-                         RedirectAttributes redirectAttributes) {
-        studentService.save(student);
-        redirectAttributes.addFlashAttribute("message", "Create new student successfully");
-        return "redirect:/students";
-    }
+//    @GetMapping("/create")
+//    public String create(Model model) {
+//        model.addAttribute("student",new Student());
+//        return "lecturer/student/create";
+//    }
+//
+//
+//    @PostMapping("/save")
+//    public String create(@ModelAttribute("student") Student student,
+//                         RedirectAttributes redirectAttributes) {
+//        studentService.save(student);
+//        redirectAttributes.addFlashAttribute("message", "Create new student successfully");
+//        return "redirect:/students";
+//    }
 
 
     @GetMapping("/update/{id}")
     public ModelAndView updateForm(@PathVariable Long id) {
         Optional<Student> student = studentService.findById(id);
         if (student.isPresent()) {
-            ModelAndView modelAndView = new ModelAndView("/student/update");
+            ModelAndView modelAndView = new ModelAndView("lecturer/student/update");
             modelAndView.addObject("student", student.get());
             return modelAndView;
         } else {
@@ -73,7 +69,7 @@ public class StudentController {
         }
 
 
-        ModelAndView modelAndView = new ModelAndView("/student/view");
+        ModelAndView modelAndView = new ModelAndView("lecturer/student/view");
         //trung voi list cua car(Object)
         modelAndView.addObject("student", studentOptional.get());
         return modelAndView;
@@ -89,7 +85,7 @@ public class StudentController {
             students = studentService.findAll(); // Trả về danh sách tất cả học viên nếu không có className
         }
 
-        ModelAndView modelAndView = new ModelAndView("student/list"); // Tên của Thymeleaf template để hiển thị danh sách học viên
+        ModelAndView modelAndView = new ModelAndView("lecturer/student/view"); // Tên của Thymeleaf template để hiển thị danh sách học viên
         modelAndView.addObject("students", students);
         modelAndView.addObject("classes", classService.findAll()); // Đưa danh sách lớp học để dùng trong form tìm kiếm
         return modelAndView;

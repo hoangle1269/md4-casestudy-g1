@@ -4,7 +4,7 @@ import com.example.md4casestudy.model.Attendance;
 import com.example.md4casestudy.model.Classes;
 import com.example.md4casestudy.model.Lecturer;
 import com.example.md4casestudy.repository.AttendanceRepository;
-import com.example.md4casestudy.repository.IClassRepos;
+import com.example.md4casestudy.repository.IClassRepository;
 import com.example.md4casestudy.repository.ILecturerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class AttendanceServiceImpl implements IAttendanceService {
     private AttendanceRepository attendanceRepository;
 
     @Autowired
-    private IClassRepos iClassRepos;
+    private IClassRepository iClassRepository;
 
     @Autowired
     private ILecturerRepository ilecturerRepository;
@@ -31,7 +31,7 @@ public class AttendanceServiceImpl implements IAttendanceService {
             throw new IllegalArgumentException("classId or lecturerId must not be null");
         }
 
-        Classes classes = iClassRepos.findById(classId)
+        Classes classes = iClassRepository.findById(classId)
                 .orElseThrow(() -> new RuntimeException("Class not found with id: " + classId));
 
         Lecturer lecturer = ilecturerRepository.findById(lecturerId)

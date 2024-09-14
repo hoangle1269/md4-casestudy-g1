@@ -8,7 +8,7 @@ import java.util.List;
 
 
 @Repository
-public interface IClassRepos extends JpaRepository<Classes,Long> {
+public interface IClassRepository extends JpaRepository<Classes,Long> {
     List<Classes> findByLecturer_LecturerId(Long lecturerId);
 
 

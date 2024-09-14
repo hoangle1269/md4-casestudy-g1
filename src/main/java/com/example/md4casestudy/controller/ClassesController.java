@@ -39,7 +39,7 @@ public class ClassesController {
     @GetMapping
     public String getAllClass(Model model) {
         model.addAttribute("classes", classService.findAll());
-        return "/class/list"; // Tên file HTML bạn sẽ tạo để hiển thị danh sách học viên
+        return "lecturer/class/list"; // Tên file HTML bạn sẽ tạo để hiển thị danh sách học viên
     }
     @GetMapping("/students")
     public String getStudentsByClassId(@RequestParam("classId") Long classId,
@@ -60,7 +60,7 @@ public class ClassesController {
             model.addAttribute("students", students);
             model.addAttribute("totalStudents", students.size());
             model.addAttribute("class", classes);
-            return "/student/students";
+            return "lecturer/student/students";
         } else {
             // Xử lý khi lớp học không tồn tại (ví dụ: trả về trang lỗi hoặc trang không tìm thấy)
             return "error";
