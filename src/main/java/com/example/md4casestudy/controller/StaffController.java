@@ -63,8 +63,8 @@ public class StaffController {
     @GetMapping("/grades/{id}")
     public String staffClasses(Model model, @PathVariable Long id) {
         List<ClassStudentGradeDTO> classAverageGradeDTO = staffRepository.findClassStudentGradeDetailsByStudentId(id);
-        Optional<Student> student = studentService.findById(id);
-        model.addAttribute("studentss", student.get());
+        Student student = studentService.findById(id);
+        model.addAttribute("studentInformation", student);
         model.addAttribute("classAverageGradeDTO", classAverageGradeDTO);
         return "staffPages/index";
     }
@@ -73,11 +73,9 @@ public class StaffController {
     public String addStaff(@PathVariable("idStudent") Long idStudent,
                            @PathVariable("idGrade") Long idGrade,
                            Model model) {
-//        Grades grades = new Grades();
         Grades grade = gradeService.findById(idGrade);
         ClassStudentGradeDTO classStudentGradeDTO = staffRepository.findClassStudentGradeDetailsByGradeId(idGrade);
         model.addAttribute("classStudentGradeDTO", classStudentGradeDTO);
-//        model.addAttribute("grades", grades);
         model.addAttribute("grade", grade);
 
         return "staffPages/forms/addAndEdit";
@@ -101,8 +99,27 @@ public class StaffController {
     public String deleteGrade(@PathVariable("idGrade") Long idGrade, @PathVariable("idStudent") Long idStudent, Model model) {
         gradeService.remove(idGrade);
         List<ClassStudentGradeDTO> classAverageGradeDTO = staffRepository.findClassStudentGradeDetailsByStudentId(idStudent);
-        Optional<Student> student = studentService.findById(idStudent);
-        model.addAttribute("studentss", student.get());
+        Student student = studentService.findById(idStudent);
+        model.addAttribute("studentss", student);
+        model.addAttribute("classAverageGradeDTO", classAverageGradeDTO);
+        return "staffPages/index";
+    }
+
+    @GetMapping("/changeStatus/{isStudent}/{status}")
+    public String changeStatus(@PathVariable("isStudent") Long studentId,
+                               @PathVariable("status") String status,
+                               Model model) {
+
+        Student student = studentService.findById(studentId);
+        if (student != null) {
+            student.setStatus(status);
+            studentService.save(student);
+        }
+
+
+        List<ClassStudentGradeDTO> classAverageGradeDTO = staffRepository.findClassStudentGradeDetailsByStudentId(studentId);
+        Student students = studentService.findById(studentId);
+        model.addAttribute("studentInformation", students);
         model.addAttribute("classAverageGradeDTO", classAverageGradeDTO);
         return "staffPages/index";
     }

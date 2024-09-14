@@ -314,6 +314,8 @@
                     </div>
 
                     <!--                    end-->
+
+                    <!--                    list Student-->
                     <div th:if="${student != null }">
                         <header class="u-clearfix u-header u-header" id="sec-0248">
                             <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
@@ -341,10 +343,28 @@
                                                                th:href="@{/staff/grades/{id}  (id=${students.idStudent})}">
                                                                 <div style="margin-right: 100px"
                                                                      class=" bg-hover-primary u-clearfix u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group-elements u-group-elements-1">
-                                                                    <h6 style="color: #0f0f0f"
-                                                                        class=" u-align-center-md u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-xl u-text u-text-2"
-                                                                        th:text="${students.nameStudent}">
-                                                                        name</h6>
+                                                                    <div style="    display: flex;justify-content: center;align-items: baseline;">
+                                                                        <h6 style="color: #0f0f0f"
+                                                                            class=" u-align-center-md u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-xl u-text u-text-2"
+                                                                            th:text="${students.nameStudent.user.fullName}">
+                                                                            name</h6>
+                                                                        <h5 class="font-weight-bold">
+        <span th:switch="${students.nameStudent.status}">
+            <i th:case="'studying'" class="fa fa-check-circle text-success"></i>
+            <span th:case="'studying'" class="text-success" th:text="${studentInformation.status}"></span>
+
+            <i th:case="'waiting for class change'" class="fa fa-clock text-warning"></i>
+            <span th:case="'waiting for class change'" class="text-warning"
+                  th:text="${studentInformation.status}"></span>
+
+            <i th:case="'suspend'" class="fa fa-exclamation-circle text-danger"></i>
+            <span th:case="'suspend'" class="text-danger" th:text="${studentInformation.status}"></span>
+
+            <i th:case="'drop out'" class="fa fa-times-circle text-muted"></i>
+            <span th:case="'drop out'" class="text-muted" th:text="${studentInformation.status}"></span>
+        </span>
+                                                                        </h5>
+                                                                    </div>
                                                                     <p style="color: #0a3622"
                                                                        class=" u-align-center-md u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-xl u-text u-text-3"
                                                                        th:text="${students.gmail}">
@@ -373,7 +393,47 @@
                                         <div class="col-lg-12 stretch-card">
                                             <div class="card">
                                                 <div class="card-body">
-<!--                                                    <h3 th:text="status"> </h3>-->
+                                                    <div style="display: flex;align-items: baseline">
+                                                        <h5 th:switch="${studentInformation.status}"
+                                                            class="font-weight-bold">
+                                                            <span th:case="'studying'" class="text-success"
+                                                                  th:text="${studentInformation.status}"></span>
+                                                            <span th:case="'waiting for class change'"
+                                                                  class="text-warning"
+                                                                  th:text="${studentInformation.status}"></span>
+                                                            <span th:case="'suspend'" class="text-danger"
+                                                                  th:text="${studentInformation.status}"></span>
+                                                            <span th:case="'drop out'" class="text-muted"
+                                                                  th:text="${studentInformation.status}"></span>
+                                                        </h5>
+                                                        <div class="dropdown">
+                                                            <i class="fa fa-bars" style="margin-left: 1rem"
+                                                               id="dropdownMenuIconButton6"
+                                                               data-bs-toggle="dropdown"
+                                                               aria-haspopup="true"
+                                                               aria-expanded="false"></i>
+                                                            <div class="dropdown-menu"
+                                                                 aria-labelledby="dropdownMenuIconButton6">
+                                                                <h6 class="dropdown-header">Change Status</h6>
+                                                                <a class="dropdown-item"
+                                                                   th:href="@{/staff/changeStatus/{idStudent}/{status}(idStudent=${studentInformation.studentId}, status='studying')}"
+                                                                >Studying</a>
+                                                                <a class="dropdown-item"
+                                                                   th:href="@{/staff/changeStatus/{idStudent}/{status}(idStudent=${studentInformation.studentId}, status='waiting for class change')}"
+                                                                >Waiting for Class Change</a>
+                                                                <a class="dropdown-item"
+                                                                   th:href="@{/staff/changeStatus/{idStudent}/{status}(idStudent=${studentInformation.studentId}, status='suspend')}"
+                                                                >Suspend</a>
+                                                                <a class="dropdown-item"
+                                                                   th:href="@{/staff/changeStatus/{idStudent}/{status}(idStudent=${studentInformation.studentId}, status='drop out')}"
+                                                                >Drop Out</a>
+                                                            </div>
+
+
+                                                        </div>
+                                                    </div>
+
+
                                                     <h4 class="card-title">Summary of subject scores</h4>
                                                     <div class="table-responsive pt-3" style="height: 50vh">
                                                         <table class="table table-bordered table-striped">
@@ -425,7 +485,8 @@
                                                                                         Settings</h6>
                                                                                     <a class="dropdown-item"
                                                                                        th:href="@{/staff/add/{idStudent}/{idGrade} (idStudent=${classAverageGrade.studentName.studentId},idGrade=${classAverageGrade.grade.gradeId}) }">Edit</a>
-                                                                                    <a class="dropdown-item" th:onclick="'doDelete(' + ${classAverageGrade.studentName.studentId} + ',' + ${classAverageGrade.grade.gradeId} + ')'">Delete</a>
+                                                                                    <a class="dropdown-item"
+                                                                                       th:onclick="'doDelete(' + ${classAverageGrade.studentName.studentId} + ',' + ${classAverageGrade.grade.gradeId} + ')'">Delete</a>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -480,12 +541,13 @@
 <!-- <script src="assets/js/Chart.roundedBarCharts.js"></script> -->
 <!-- End custom js for this page-->
 <script>
-    function doDelete(idStudent,idGrade) {
-        const check = confirm("do ?");
+    function doDelete(idStudent, idGrade) {
+        const check = confirm("you definitely want to delete ???");
         if (check) {
             window.location.href = "/staff/deleteGrade/" + idStudent + "/" + idGrade;
         }
     }
+
 </script>
 
 

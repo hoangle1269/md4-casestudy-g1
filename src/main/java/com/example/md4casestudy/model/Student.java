@@ -23,4 +23,5 @@ public class Student {
     private Classes className;
     @NotNull
     private String status;
+
 }

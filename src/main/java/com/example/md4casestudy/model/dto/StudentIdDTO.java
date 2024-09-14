@@ -1,24 +1,26 @@
 package com.example.md4casestudy.model.dto;
 
+import com.example.md4casestudy.model.Student;
+
 public class StudentIdDTO {
-    private String nameStudent;
+    private Student nameStudent;
     private String gmail;
     private Long idStudent;
 
     public StudentIdDTO() {
     }
 
-    public StudentIdDTO(String nameStudent, String gmail, Long idStudent) {
+    public StudentIdDTO(Student nameStudent, String gmail, Long idStudent) {
         this.nameStudent = nameStudent;
         this.gmail = gmail;
         this.idStudent = idStudent;
     }
 
-    public String getNameStudent() {
+    public Student getNameStudent() {
         return nameStudent;
     }
 
-    public void setNameStudent(String nameStudent) {
+    public void setNameStudent(Student nameStudent) {
         this.nameStudent = nameStudent;
     }
 
