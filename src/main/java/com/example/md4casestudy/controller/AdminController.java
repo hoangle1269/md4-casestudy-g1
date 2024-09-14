@@ -2,6 +2,7 @@ package com.example.md4casestudy.controller;
 
 import com.example.md4casestudy.model.Classes;
 import com.example.md4casestudy.model.ENUM.ROLE;
+import com.example.md4casestudy.model.Subject;
 import com.example.md4casestudy.model.User;
 import com.example.md4casestudy.model.dto.ClassAverageGradeDTO;
 import com.example.md4casestudy.model.dto.StudentAverageGradeDTO;
@@ -9,13 +10,11 @@ import com.example.md4casestudy.repository.GradeRepository;
 import com.example.md4casestudy.repository.UserRepository;
 import com.example.md4casestudy.model.dto.TeacherStudentCountDTO;
 import com.example.md4casestudy.service.appUser.AppUserService;
+import com.example.md4casestudy.service.subject.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +29,8 @@ public class AdminController {
     private UserRepository userRepository;
     @Autowired
     private GradeRepository gradesRepository;
-
+    @Autowired
+    private SubjectService subjectService;
     @GetMapping
     public String homePage(Model model) {
         List<TeacherStudentCountDTO> teacherStudentCountDTO = userRepository.findTeacherStudentCounts();
@@ -69,6 +69,7 @@ public class AdminController {
     public String adminDashboard(Model model) {
         model.addAttribute("user", new User());
         model.addAttribute("roles", Arrays.asList(ROLE.values()));
+        model.addAttribute("subject", new Subject());
         return "adminPages/forms/add";
     }
 
@@ -77,7 +78,11 @@ public class AdminController {
         userService.save(user);
         return "redirect:/admin";
     }
-
+    @PostMapping("/saveSubject")
+    public String saveSubject(@ModelAttribute("subject") Subject subject) {
+        subjectService.saveSubject(subject);
+        return "redirect:/admin";
+    }
     @GetMapping("/averageGrade/{id}")
 
     public String checkFeesAndSendReminders(Model model, @PathVariable long id) {
@@ -98,8 +103,8 @@ public class AdminController {
         model.addAttribute("studentNames", studentNames);
         model.addAttribute("averageGrades", averageGrades);
         model.addAttribute("classes", classes);
-        System.out.println("////////////////////" + studentNames + "/////////////////" + averageGrades);
         return "adminPages/charts/dataClass";
     }
+
 }
 

@@ -3,7 +3,6 @@ package com.example.md4casestudy.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
-//Chứa thông tin về các môn học.
 @Entity
 @Data
 @Table(name = "subjects")
