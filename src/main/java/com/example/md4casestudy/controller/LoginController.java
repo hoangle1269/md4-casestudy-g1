@@ -1,6 +1,7 @@
 package com.example.md4casestudy.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,7 +16,7 @@ public class LoginController {
 
     // Trang đăng nhập
     @GetMapping("/login")
-    public String login() {
+    public String login(ModelMap model) {
         return "login";
     }
 

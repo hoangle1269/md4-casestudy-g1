@@ -490,8 +490,8 @@
 }
 
 .u-section-3 .u-image-1 {
-  width: 141px;
-  height: 141px;
+  width: 100px;
+  height: 100px;
   --animation-custom_in-translate_x: 50px;
   --animation-custom_in-translate_y: 0px;
   --animation-custom_in-opacity: 0;
@@ -508,7 +508,7 @@
 }
 
 .u-section-3 .u-text-2 {
-  margin: 0;
+  margin: 15px;
 }
 
 .u-section-3 .u-text-3 {

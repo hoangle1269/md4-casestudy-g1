@@ -71,6 +71,17 @@
     <meta property="og:type" content="website">
     <meta data-intl-tel-input-cdn-path="intlTelInput/">
 
+
+    <style>
+        .bg-hover-primary:hover {
+            background-color: #f0f0f0;
+        }
+
+        .bg-hover-primary {
+            background-color: white;
+            text-align: center;
+        }
+    </style>
 </head>
 <body class="with-welcome-text">
 <div class="container-scroller">
@@ -326,14 +337,20 @@
                                                                  data-animation-name="customAnimationIn"
                                                                  data-animation-duration="1500"
                                                                  data-animation-delay="750">
-                                                            <div class="u-clearfix u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group-elements u-group-elements-1">
-                                                                <h6 class="u-align-center-md u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-xl u-text u-text-2"
-                                                                    th:text="${students.fullName}">
-                                                                    name</h6>
-                                                                <p class="u-align-center-md u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-xl u-text u-text-3"
-                                                                   th:text="${students.email}">
-                                                                    email</p>
-                                                            </div>
+                                                            <a class="nav-link"
+                                                               th:href="@{/staff/grades/{id}  (id=${students.idStudent})}">
+                                                                <div style="margin-right: 100px"
+                                                                     class=" bg-hover-primary u-clearfix u-expanded-width-md u-expanded-width-sm u-expanded-width-xs u-group-elements u-group-elements-1">
+                                                                    <h6 style="color: #0f0f0f"
+                                                                        class=" u-align-center-md u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-xl u-text u-text-2"
+                                                                        th:text="${students.nameStudent}">
+                                                                        name</h6>
+                                                                    <p style="color: #0a3622"
+                                                                       class=" u-align-center-md u-align-center-sm u-align-center-xs u-align-left-lg u-align-left-xl u-text u-text-3"
+                                                                       th:text="${students.gmail}">
+                                                                        email</p>
+                                                                </div>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -345,47 +362,98 @@
                         </header>
                     </div>
                     <!--                    ///////////////////////////////////////////-->
+
+
+                    <!--                    điểm-->
+                    <div th:if="${classAverageGradeDTO} != null">
+                        <div class="main-panel">
+                            <div class="content-wrapper">
+                                <div class="row">
+                                    <div class="grid-margin stretch-card">
+                                        <div class="col-lg-12 stretch-card">
+                                            <div class="card">
+                                                <div class="card-body">
+<!--                                                    <h3 th:text="status"> </h3>-->
+                                                    <h4 class="card-title">Summary of subject scores</h4>
+                                                    <div class="table-responsive pt-3" style="height: 50vh">
+                                                        <table class="table table-bordered table-striped">
+                                                            <thead>
+                                                            <tr>
+                                                                <th> #</th>
+                                                                <th> First name</th>
+                                                                <th> Subjects</th>
+                                                                <th> theory</th>
+                                                                <th> Practise</th>
+                                                                <th> Averagegrade</th>
+                                                                <th> Result</th>
+                                                                <th> Options</th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            <div th:each="classAverageGrade,iterStat  : ${classAverageGradeDTO}">
+                                                                <tr c
+                                                                    lass="table-info">
+                                                                    <td th:text="${iterStat.index + 1}">1</td>
+                                                                    <td th:text="${classAverageGrade.studentName.user.fullName}"></td>
+                                                                    <td th:text="${classAverageGrade.subjectName.subjectName}"></td>
+                                                                    <td th:text="${classAverageGrade.grade.theoryGrade}"></td>
+                                                                    <td th:text="${classAverageGrade.grade.practicalGrade}"></td>
+                                                                    <td th:text="${classAverageGrade.grade.averageGrade}"></td>
+                                                                    <div th:if="${classAverageGrade.grade.averageGrade >= 5}">
+                                                                        <td class="fs-6 text-success">Pass</td>
+                                                                    </div>
+                                                                    <div th:if="${classAverageGrade.grade.averageGrade < 5}">
+                                                                        <td class="fs-6 text-danger">Fail</td>
+                                                                    </div>
+                                                                    <td style="display: flex;justify-content: center;">
+                                                                        <div style="height: 16px;"
+                                                                             class="template-demo d-flex justify-content-between flex-wrap">
+                                                                            <div class="dropdown">
+                                                                                <button style="position: relative;top: -5px"
+                                                                                        type="button"
+                                                                                        class="btn btn-sm dropdown-toggle "
+                                                                                        id="dropdownMenuIconButton9"
+                                                                                        data-bs-toggle="dropdown"
+                                                                                        aria-haspopup="true"
+                                                                                        aria-expanded="false">
+                                                                                    <i class="ti-user"></i>
+                                                                                </button>
+                                                                                <div style="transform: translate(-71px, 47px);"
+                                                                                     class="dropdown-menu"
+                                                                                     aria-labelledby="dropdownMenuIconButton9">
+                                                                                    <h6 class="dropdown-header">
+                                                                                        Settings</h6>
+                                                                                    <a class="dropdown-item"
+                                                                                       th:href="@{/staff/add/{idStudent}/{idGrade} (idStudent=${classAverageGrade.studentName.studentId},idGrade=${classAverageGrade.grade.gradeId}) }">Edit</a>
+                                                                                    <a class="dropdown-item" th:onclick="'doDelete(' + ${classAverageGrade.studentName.studentId} + ',' + ${classAverageGrade.grade.gradeId} + ')'">Delete</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+
+                                                                </tr>
+                                                            </div>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--                            /////////////////////////////////////////////////////////////////////////////////-->
+                            </div>
+                        </div>
+                    </div>
                 </div>
+                <footer class="footer">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="float-none float-sm-end d-block mt-1 mt-sm-0 text-center">Copyright © 2024. All rights reserved.</span>
+                    </div>
+                </footer>
+
             </div>
-            <!-- Team End -->
-
-            <!-- Testimonial Start -->
-            <!--            <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">-->
-            <!--                <div class="container">-->
-            <!--                    <div class="text-center">-->
-            <!--                        <h6 class="section-title bg-white text-center text-primary px-3">Instructors</h6>-->
-            <!--                        <h1 class="mb-5">Expert Instructors</h1>-->
-            <!--                    </div>-->
-            <!--                    <div class="owl-carousel testimonial-carousel position-relative">-->
-
-
-            <!--                        <div th:each="teacherStudentCountDTO : ${teacher}"-->
-            <!--                             data-wow-delay="0.1s">-->
-            <!--                            <div class="testimonial-item text-center">-->
-            <!--                                <img class="border rounded-circle p-2 mx-auto mb-3"-->
-            <!--                                     src="staradmin/src/img/anhcd.jpg" style="width: 80px; height: 80px;">-->
-            <!--                                <h5 class="mb-0" th:text="${teacherStudentCountDTO.teacherName.fullName}">Client-->
-            <!--                                    Name</h5>-->
-            <!--                                <p th:text="${teacherStudentCountDTO.teacherName.role}">Profession</p>-->
-            <!--                                <div class="testimonial-text bg-light text-center p-4">-->
-            <!--                                    <p class="mb-0"-->
-            <!--                                       th:text="${'Email:'+' '+ teacherStudentCountDTO.teacherName.email + ' - - '+' '+'Phone Number:'+ teacherStudentCountDTO.teacherName.phoneNumber+ ' - - ' +' '+'address:'+ teacherStudentCountDTO.teacherName.address }"></p>-->
-
-            <!--                                </div>-->
-            <!--                            </div>-->
-            <!--                        </div>-->
-            <!--                    </div>-->
-            <!--                </div>-->
-            <!--            </div>-->
-            <!-- Testimonial End -->
-            <footer class="footer">
-                <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                    <span class="float-none float-sm-end d-block mt-1 mt-sm-0 text-center">Copyright © 2024. All rights reserved.</span>
-                </div>
-            </footer>
-
         </div>
-
 
     </div>
     <!-- page-body-wrapper ends -->
@@ -411,6 +479,14 @@
 <script src="staradmin/src/assets/js/dashboard.js"></script>
 <!-- <script src="assets/js/Chart.roundedBarCharts.js"></script> -->
 <!-- End custom js for this page-->
+<script>
+    function doDelete(idStudent,idGrade) {
+        const check = confirm("do ?");
+        if (check) {
+            window.location.href = "/staff/deleteGrade/" + idStudent + "/" + idGrade;
+        }
+    }
+</script>
 
 
 <!-- Footer End -->
@@ -424,5 +500,6 @@
 
 <!-- Template Javascript -->
 <script src="staradmin/src/js/main.js"></script>
+
 </body>
 </html>

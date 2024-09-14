@@ -12,7 +12,7 @@ public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "studentid")
-    private Integer studentId;
+    private Long studentId;
 
     @ManyToOne
     @JoinColumn(name = "userid")
