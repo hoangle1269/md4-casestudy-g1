@@ -9,26 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public class LoginController {
 
-    @GetMapping("/home")
-    public String home() {
-        return "home";
-    }
 
-    // Trang đăng nhập
     @GetMapping("/login")
-    public String login(ModelMap model) {
+    public String login() {
         return "login";
     }
 
-    // Trang đăng ký
-    @GetMapping("/register")
-    public String register() {
-        return "register";
+    @GetMapping("/logout")
+    public String logout() {
+        return "logout";
     }
 
-    // Trang lỗi 404
-    @GetMapping("/error_404")
-    public String error404() {
-        return "error_404";
-    }
+
 }

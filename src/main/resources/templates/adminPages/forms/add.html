@@ -175,7 +175,7 @@
                             Activity</a>
                         <a class="dropdown-item"><i
                                 class="dropdown-item-icon mdi mdi-help-circle-outline text-primary me-2"></i> FAQ</a>
-                        <a class="dropdown-item"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign
+                        <a class="dropdown-item"  href="/logout"><i class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign
                             Out</a>
                     </div>
                 </li>
@@ -287,7 +287,7 @@
                     <div class="col-md-6 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">More courses</h4>
+                                <h4 class="card-title">Add Subject</h4>
                                 <form th:action="@{/admin/saveSubject}" th:object="${subject}" method="post" class="forms-sample">
                                     <div class="form-group row">
                                         <label for="subjectName" class="col-sm-3 col-form-label">Course Name</label>
