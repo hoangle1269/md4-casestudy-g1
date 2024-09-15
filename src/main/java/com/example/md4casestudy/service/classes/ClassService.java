@@ -19,4 +19,8 @@ public class ClassService {
     public Classes findById(Long id) {
         return classRepository.findById(id).orElse(null);
     }
+
+    public Classes save(Classes classes) {
+        return classRepository.save(classes);
+    }
 }

@@ -122,6 +122,12 @@ public class AdminController {
         check = true;
         return "redirect:/admin";
     }
+    @PostMapping("/saveClass")
+    public String saveClass(@ModelAttribute("class") Classes classes) {
+        classService.save(classes);
+        check = true;
+        return "redirect:/admin";
+    }
 
     @GetMapping("/averageGrade/{id}")
 
