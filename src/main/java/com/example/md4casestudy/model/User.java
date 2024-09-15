@@ -35,6 +35,8 @@ public class User {
 
     @NotNull
     private String role;
+    @Column(name = "img")
+    private String img;
 
 
 }

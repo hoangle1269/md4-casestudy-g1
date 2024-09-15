@@ -221,7 +221,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">Register a user account</h4>
-                                <form class="forms-sample" th:action="@{/admin/add}" th:object="${user}" method="post">
+                                <form class="forms-sample" th:action="@{/admin/add}" th:object="${user}" method="post"
+                                      enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="email">Email address</label>
                                         <input class="form-control" type="email" id="email" th:field="*{email}"
@@ -275,6 +276,10 @@
                                             </select>
                                         </label>
                                     </div>
+                                    <div>
+                                        <label for="img">Image</label>
+                                        <input class="form-control" type="file" id="img" th:field="*{img}"/>
+                                    </div>
                                     <div class="form-check form-check-flat form-check-primary">
                                         <label class="form-check-label">
                                             <input type="checkbox" class="form-check-input"> Remember me </label>
@@ -321,7 +326,7 @@
                                         </div>
                                         <div class="col-sm-9">
                                             <label for="status" class="form-label"> Status </label>
-                                            <select  id="status" style="width: 100%" th:field="*{status}"
+                                            <select id="status" style="width: 100%" th:field="*{status}"
                                                     class="form-select form-control">
                                                 <option value="" disabled selected>Select Status</option>
                                                 <option th:each="status : ${studentStatus}"
@@ -347,7 +352,8 @@
                                                placeholder="Class Name...">
                                         <div class="col-sm-9">
                                             <label for="Lecturer" class="form-label">Lecturer</label>
-                                            <select id="Lecturer" th:field="*{lecturer}" class="form-select form-control">
+                                            <select id="Lecturer" th:field="*{lecturer}"
+                                                    class="form-select form-control">
                                                 <option class="forms-sample form-control text-dark"
                                                         th:each="lecturer : ${listLecturer}"
                                                         th:value="${lecturer.id}"

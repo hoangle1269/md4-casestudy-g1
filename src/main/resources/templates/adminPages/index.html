@@ -557,9 +557,26 @@
 
                         <div th:each="teacherStudentCountDTO : ${teacher}"
                              data-wow-delay="0.1s">
+<!--                            <div th:if="${teacherStudentCountDTO.teacherName.img != null}">-->
+<!--                                <div class="testimonial-item text-center">-->
+<!--                                    <img class="border rounded-circle p-2 mx-auto mb-3"-->
+<!--                                         th:src="@{'/image/' + ${teacherStudentCountDTO.teacherName.img}}" style="width: 80px; height: 80px;">-->
+<!--                                    <h5 class="mb-0" th:text="${teacherStudentCountDTO.teacherName.fullName}">Client-->
+<!--                                        Name</h5>-->
+<!--                                    <p th:text="${teacherStudentCountDTO.teacherName.role}">Profession</p>-->
+<!--                                    <div class="testimonial-text bg-light text-center p-4">-->
+<!--                                        <p class="mb-0"-->
+<!--                                           th:text="${'Email:'+' '+ teacherStudentCountDTO.teacherName.email + ' - - '+' '+'Phone Number:'+ teacherStudentCountDTO.teacherName.phoneNumber+ ' - - ' +' '+'address:'+ teacherStudentCountDTO.teacherName.address }"></p>-->
+
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                        
+                        
+                        
                             <div class="testimonial-item text-center">
                                 <img class="border rounded-circle p-2 mx-auto mb-3"
-                                     src="staradmin/src/img/anhcd.jpg" style="width: 80px; height: 80px;">
+                                     th:src="@{'/image/' + ${teacherStudentCountDTO.teacherName.img}}" style="width: 80px; height: 80px;" alt="staradmin/src/img/anhcd.jpg">
                                 <h5 class="mb-0" th:text="${teacherStudentCountDTO.teacherName.fullName}">Client
                                     Name</h5>
                                 <p th:text="${teacherStudentCountDTO.teacherName.role}">Profession</p>
@@ -569,6 +586,8 @@
 
                                 </div>
                             </div>
+                        
+                        
                         </div>
                     </div>
                 </div>

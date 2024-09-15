@@ -1,11 +1,8 @@
 package com.example.md4casestudy.controller;
 
-import com.example.md4casestudy.model.Classes;
+import com.example.md4casestudy.model.*;
 import com.example.md4casestudy.model.ENUM.ROLE;
 import com.example.md4casestudy.model.ENUM.STUDENT_STATUS;
-import com.example.md4casestudy.model.Student;
-import com.example.md4casestudy.model.Subject;
-import com.example.md4casestudy.model.User;
 import com.example.md4casestudy.model.dto.ClassAverageGradeDTO;
 import com.example.md4casestudy.model.dto.StudentAverageGradeDTO;
 import com.example.md4casestudy.model.dto.StudentDTO;
@@ -18,10 +15,16 @@ import com.example.md4casestudy.service.fee.FeeService;
 import com.example.md4casestudy.service.student.StudentService;
 import com.example.md4casestudy.service.subject.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,6 +47,9 @@ public class AdminController {
     @Autowired
     private FeeService feeService;
     boolean check = false;
+
+    @Value("${file-upload}")
+    private String upload;
 
     @GetMapping
     public String homePage(Model model) {
@@ -95,12 +101,40 @@ public class AdminController {
         return "adminPages/forms/add";
     }
 
+//    @PostMapping("/add")
+//    public String addUser(User user) {
+//        userService.save(user);
+//        check = true;
+//        return "redirect:/admin";
+//    }
+
     @PostMapping("/add")
-    public String addUser(User user) {
+    public String save(@ModelAttribute UserForm userForm) {
+        MultipartFile file = userForm.getImg();
+        String fileName = file.getOriginalFilename();
+        try {
+            FileCopyUtils.copy(file.getBytes(), new File(upload + fileName));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        User user = new User();
+        user.setEmail(userForm.getEmail());
+        user.setPassword(userForm.getPassword());
+        user.setPhoneNumber(userForm.getPhoneNumber());
+        user.setFullName(userForm.getFullName());
+        user.setDateOfBirth(userForm.getDateOfBirth());
+        user.setAddress(userForm.getAddress());
+        user.setIdentity(userForm.getIdentity());
+        user.setRole(userForm.getRole());
+        user.setImg(fileName);
+
         userService.save(user);
+
         check = true;
         return "redirect:/admin";
     }
+
 
     @PostMapping("/saveSubject")
     public String saveSubject(@ModelAttribute("subject") Subject subject) {
