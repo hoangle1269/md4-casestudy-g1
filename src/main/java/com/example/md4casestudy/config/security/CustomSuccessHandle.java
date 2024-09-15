@@ -15,11 +15,9 @@ public class CustomSuccessHandle implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
-        // Lấy quyền của người dùng hiện tại
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         String redirectUrl = "/";
 
-        // Xác định trang chuyển hướng dựa trên vai trò của người dùng
         if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("admin"))) {
             redirectUrl = "/admin";
         } else if (authorities.stream().anyMatch(auth -> auth.getAuthority().equals("lecturer"))) {
@@ -30,7 +28,6 @@ public class CustomSuccessHandle implements AuthenticationSuccessHandler {
             redirectUrl = "/staff";
         }
 
-        // Chuyển hướng người dùng đến URL phù hợp
         response.sendRedirect(redirectUrl);
     }
 }
