@@ -5,13 +5,13 @@ import lombok.Data;
 
 import java.time.LocalDate;
 
-//Chứa nhật ký hàng ngày cho lớp học và học viên.
 @Entity
 @Data
-@Table(name = "attendances")
+@Table(name = "class_diaries")
 public class Attendance {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "log_id")
     private Long logId;
 
     @ManyToOne
@@ -19,15 +19,12 @@ public class Attendance {
     private Classes classes;
 
     @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
-    private Student student;
-
-    @ManyToOne
     @JoinColumn(name = "lecturer_id", nullable = false)
     private Lecturer lecturer;
 
     @Column(name = "date", nullable = false)
-    private LocalDate date = LocalDate.now();
+    private LocalDate date = LocalDate.now(); // Ngày hiện tại sẽ được gán mặc định
 
-    private String content;//Noi dung Nhat ky
+
+    private String content; // Nội dung nhật ký
 }

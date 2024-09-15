@@ -36,7 +36,7 @@ public class StudentDiaryController {
 
         model.addAttribute("studentDiaries", diaries);
         model.addAttribute("studentId", studentId);
-        return "/studentDiary/list";
+        return "/lecturer/studentDiary/list";
     }
 
     // Hiển thị form tạo nhật ký
@@ -52,7 +52,7 @@ public class StudentDiaryController {
         model.addAttribute("diary", new StudentDiary());
         model.addAttribute("lecturers", lecturers);
 
-        return "/studentDiary/create";
+        return "/lecturer/studentDiary/create";
     }
 
     // Xử lý lưu nhật ký
