@@ -27,4 +27,13 @@ public class Classes {
     @OneToMany(mappedBy = "classes")
     private Set<Student> students; // Thêm liên kết đến học viên
 
+    @Override
+    public String toString() {
+        return "Class{" +
+                "classId=" + classId +
+                ", className='" + className + '\'' +
+                ", lecturer=" + lecturer +
+                '}';
+    }
+
 }

@@ -2,6 +2,7 @@ package com.example.md4casestudy.repository;
 
 import com.example.md4casestudy.model.ENUM.STUDENT_STATUS;
 import com.example.md4casestudy.model.Student;
+import com.example.md4casestudy.model.dto.StudentIdDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -17,4 +18,5 @@ public interface IStudentRepository extends JpaRepository<Student, Long> {
 
     List<Student> findByClasses_ClassIdAndStatus(Long classId, STUDENT_STATUS status);
 
+    List<StudentIdDTO> listStudent(Long classId);
 }

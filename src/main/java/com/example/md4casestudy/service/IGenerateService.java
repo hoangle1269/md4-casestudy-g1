@@ -1,5 +1,6 @@
 package com.example.md4casestudy.service;
 
+import com.example.md4casestudy.model.Grades;
 import com.example.md4casestudy.model.Score;
 
 import java.util.List;
@@ -14,4 +15,5 @@ public interface IGenerateService<T> {
 
     void remove(Long id);
 
+    Grades updateGrades(Grades grade);
 }

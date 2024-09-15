@@ -9,6 +9,7 @@ import com.example.md4casestudy.repository.GradeRepository;
 import com.example.md4casestudy.repository.UserRepository;
 import com.example.md4casestudy.model.dto.TeacherStudentCountDTO;
 import com.example.md4casestudy.service.appUser.AppUserService;
+import com.example.md4casestudy.service.subject.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,8 +29,12 @@ public class AdminController {
     AppUserService userService;
     @Autowired
     private UserRepository userRepository;
+
     @Autowired
     private GradeRepository gradesRepository;
+
+    @Autowired
+    private SubjectService subjectService;
 
     @GetMapping
     public String homePage(Model model) {

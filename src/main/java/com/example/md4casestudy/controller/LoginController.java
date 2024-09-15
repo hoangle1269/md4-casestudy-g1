@@ -8,28 +8,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping
 public class LoginController {
 
-    @GetMapping("/home")
-    public String home() {
-        return "home";
-    }
-
-    // Trang đăng nhập
     @GetMapping("/login")
-    public String login() {
+    public String home() {
         return "login";
     }
 
-    // Trang đăng ký
-    @GetMapping("/register")
-    public String register() {
-        return "register";
+    // Trang đăng nhập
+    @GetMapping("/logout")
+    public String login() {
+        return "logout";
     }
 
-    // Trang lỗi 404
-    @GetMapping("/error_404")
-    public String error404() {
-        return "error_404";
-    }
+    // Trang đăng ký
+//    @GetMapping("/register")
+//    public String register() {
+//        return "register";
+//    }
+//
+//    // Trang lỗi 404
+//    @GetMapping("/error_404")
+//    public String error404() {
+//        return "error_404";
+//    }
 
 //    @GetMapping("/staff")
 //    public String staff() {
