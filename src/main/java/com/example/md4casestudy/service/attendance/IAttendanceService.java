@@ -8,6 +8,5 @@ import java.util.List;
 public interface IAttendanceService extends IGenerateService<Attendance> {
 
     void saveAttendance(Long classId, Long lecturerId, String content);
-
     List<Attendance> findByClassId(Long classId);
 }

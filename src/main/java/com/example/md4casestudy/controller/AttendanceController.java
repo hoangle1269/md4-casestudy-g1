@@ -35,6 +35,7 @@ public class AttendanceController {
     @Autowired
     private ILecturerService lecturerService;
 
+
     @ModelAttribute("classes")
     public Iterable<Classes> classes() {
         return classesService.findAll();
@@ -55,7 +56,7 @@ public class AttendanceController {
         List<Attendance> attendances = attendanceService.findByClassId(classId);
         model.addAttribute("attendances", attendances);
         model.addAttribute("classId", classId);
-        return "/attendance/list";
+        return "/lecturer/attendance/list";
     }
 
     // Controller method to display the form for creating attendance
@@ -78,7 +79,7 @@ public class AttendanceController {
         model.addAttribute("classes", classesService.findAll()); // Optional, if needed
         model.addAttribute("lecturers", lecturerService.findAll()); // Fetch and add lecturers
 
-        return "attendance/create"; // Ensure this matches the view template location
+        return "/lecturer/attendance/create"; // Ensure this matches the view template location
     }
 
 
@@ -102,14 +103,19 @@ public class AttendanceController {
         }
         attendance.setClasses(classes);
 
-        attendanceService.saveAttendance(
-                attendance.getClasses().getClassId(),
-                attendance.getLecturer().getLecturerId(),
-                attendance.getContent()
-        );
+        try {
+            attendanceService.saveAttendance(
+                    attendance.getClasses().getClassId(),
+                    attendance.getLecturer().getLecturerId(),
+                    attendance.getContent()
+            );
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "Failed to create attendance.");
+            return "redirect:/attendances/create?classId=" + classId;
+        }
 
         redirectAttributes.addFlashAttribute("message", "Create new attendance successfully");
-        return "redirect:/attendances?classId=" + classId; // Redirect to list view with classId
+        return "redirect:/attendances?classId=" + classId;
     }
 
 

@@ -6,6 +6,7 @@ import com.example.md4casestudy.model.Lecturer;
 import com.example.md4casestudy.repository.AttendanceRepository;
 import com.example.md4casestudy.repository.IClassRepository;
 import com.example.md4casestudy.repository.ILecturerRepository;
+import com.example.md4casestudy.repository.IStudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,8 @@ public class AttendanceServiceImpl implements IAttendanceService {
     @Autowired
     private ILecturerRepository ilecturerRepository;
 
+    @Autowired
+    private IStudentRepository studentRepository;
     @Override
     public void saveAttendance(Long classId, Long lecturerId, String content) {
         if (classId == null || lecturerId == null) {

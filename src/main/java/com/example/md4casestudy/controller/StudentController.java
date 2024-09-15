@@ -26,20 +26,20 @@ public class StudentController {
     private IStudentService studentService;
 
 
-//    @GetMapping("/create")
-//    public String create(Model model) {
-//        model.addAttribute("student",new Student());
-//        return "lecturer/student/create";
-//    }
-//
-//
-//    @PostMapping("/save")
-//    public String create(@ModelAttribute("student") Student student,
-//                         RedirectAttributes redirectAttributes) {
-//        studentService.save(student);
-//        redirectAttributes.addFlashAttribute("message", "Create new student successfully");
-//        return "redirect:/students";
-//    }
+    @GetMapping("/create")
+    public String create(Model model) {
+        model.addAttribute("student",new Student());
+        return "lecturer/student/create";
+    }
+
+
+    @PostMapping("/save")
+    public String create(@ModelAttribute("student") Student student,
+                         RedirectAttributes redirectAttributes) {
+        studentService.save(student);
+        redirectAttributes.addFlashAttribute("message", "Create new student successfully");
+        return "redirect:/students";
+    }
 
 
     @GetMapping("/update/{id}")
@@ -61,19 +61,20 @@ public class StudentController {
         redirect.addFlashAttribute("message", "Update student successfully");
         return "redirect:/students";
     }
-    @GetMapping("{id}/view")//hiển thị ds của
-    public ModelAndView viewManufacturer(@PathVariable("id") Long id) {
+
+
+    @GetMapping("/{id}/view")
+    public ModelAndView viewStudent(@PathVariable("id") Long id) {
         Optional<Student> studentOptional = studentService.findById(id);
         if (!studentOptional.isPresent()) {
-            return new ModelAndView("/error_404");
+            return new ModelAndView("error_404");
         }
 
-
         ModelAndView modelAndView = new ModelAndView("lecturer/student/view");
-        //trung voi list cua car(Object)
         modelAndView.addObject("student", studentOptional.get());
         return modelAndView;
     }
+
 
 
     @GetMapping("/search")
