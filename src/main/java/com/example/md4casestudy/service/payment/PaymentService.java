@@ -1,5 +1,6 @@
 package com.example.md4casestudy.service.payment;
 
+import com.example.md4casestudy.model.Grades;
 import com.example.md4casestudy.model.Payment;
 import com.example.md4casestudy.repository.IPaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class PaymentService implements IPaymentService {
     }
 
     @Override
-    public Optional<Payment> findById(Long id) {
-        return Optional.empty();
+    public Payment findById(Long id) {
+        return null;
     }
 
     @Override
@@ -31,6 +32,11 @@ public class PaymentService implements IPaymentService {
     @Override
     public void remove(Long id) {
 
+    }
+
+    @Override
+    public Grades updateGrades(Grades grade) {
+        return null;
     }
 
     @Override

@@ -22,4 +22,6 @@ public interface FeeRepository extends JpaRepository<Fee, Long> {
 
     @Query(nativeQuery = true, value = "select * from fees f where f.studentid = :studentId")
     List<Fee> findByStudent(Long studentId);
+
+
 }
