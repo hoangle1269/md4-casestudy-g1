@@ -14,6 +14,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByEmail(String email);
     @Query("SELECT new com.example.md4casestudy.model.dto.TeacherStudentCountDTO(u.id, u, c, COUNT(s.studentId)) FROM User u LEFT JOIN Classes c ON u.id = c.lecturer.id LEFT JOIN Student s ON c.classId = s.className.classId WHERE u.role = 'lecturer' GROUP BY u.id, u.fullName, c.className")
     List<TeacherStudentCountDTO> findTeacherStudentCounts();
-
-
+ User findByFullName (String fullName);
 }

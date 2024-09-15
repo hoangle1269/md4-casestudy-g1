@@ -51,6 +51,12 @@
 
 </head>
 <body class="with-welcome-text">
+
+<div th:if="${check == true}">
+    <script>
+        alert("thêm thành công.")
+    </script>
+</div>
 <div class="container-scroller">
     <div class="row p-0 m-0 proBanner" id="proBanner">
         <div class="col-md-12 p-0 m-0">
@@ -504,7 +510,7 @@
                     <div class="row g-4">
 
                         <div th:each="teacherStudentCountDTO : ${teacherStudentCountDTO}"
-                          style="width: min-content;"   class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                             style="width: min-content;" class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                             <div class="team-item bg-light">
                                 <div class="overflow-hidden">
                                     <img class="img-fluid" src="staradmin/src/img/anhlop.jpg" alt="">
@@ -522,7 +528,8 @@
                                 </div>
                                 <div class="text-center p-4">
 
-                                    <p class="fs-2 fw-bold">Class:<small th:text="${teacherStudentCountDTO.className.className}">Class
+                                    <p class="fs-2 fw-bold">Class:<small
+                                            th:text="${teacherStudentCountDTO.className.className}">Class
                                         Name</small></p>
                                     <p class="fs-6">lecturer:<small
                                             th:text="${teacherStudentCountDTO.teacherName.fullName}">Instructor

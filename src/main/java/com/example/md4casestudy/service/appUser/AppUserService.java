@@ -28,7 +28,10 @@ public class AppUserService implements IAppUserService {
     public User findById(Long id) {
         return appUserRepo.findById(id).orElse(null);
     }
+    public User findByFullName(String fullName) {
+        return appUserRepo.findByFullName(fullName);
 
+    }
     @Override
     public void save(User appUser) {
         appUserRepo.save(appUser);

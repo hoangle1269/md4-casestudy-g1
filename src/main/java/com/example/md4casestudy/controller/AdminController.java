@@ -2,14 +2,19 @@ package com.example.md4casestudy.controller;
 
 import com.example.md4casestudy.model.Classes;
 import com.example.md4casestudy.model.ENUM.ROLE;
+import com.example.md4casestudy.model.ENUM.STUDENT_STATUS;
+import com.example.md4casestudy.model.Student;
 import com.example.md4casestudy.model.Subject;
 import com.example.md4casestudy.model.User;
 import com.example.md4casestudy.model.dto.ClassAverageGradeDTO;
 import com.example.md4casestudy.model.dto.StudentAverageGradeDTO;
+import com.example.md4casestudy.model.dto.StudentDTO;
 import com.example.md4casestudy.repository.GradeRepository;
 import com.example.md4casestudy.repository.UserRepository;
 import com.example.md4casestudy.model.dto.TeacherStudentCountDTO;
 import com.example.md4casestudy.service.appUser.AppUserService;
+import com.example.md4casestudy.service.classes.ClassService;
+import com.example.md4casestudy.service.student.StudentService;
 import com.example.md4casestudy.service.subject.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +36,11 @@ public class AdminController {
     private GradeRepository gradesRepository;
     @Autowired
     private SubjectService subjectService;
+    @Autowired
+    private ClassService classService;
+    @Autowired
+    private StudentService studentService;
+boolean check = false;
     @GetMapping
     public String homePage(Model model) {
         List<TeacherStudentCountDTO> teacherStudentCountDTO = userRepository.findTeacherStudentCounts();
@@ -42,6 +52,8 @@ public class AdminController {
         }
         model.addAttribute("teacherStudentCountDTO", teacherStudentCount);
         model.addAttribute("teacher", teacherStudentCountDTO);
+        model.addAttribute("check",check);
+        check = false;
         return "adminPages/index";
     }
 
@@ -70,19 +82,39 @@ public class AdminController {
         model.addAttribute("user", new User());
         model.addAttribute("roles", Arrays.asList(ROLE.values()));
         model.addAttribute("subject", new Subject());
+        model.addAttribute("studentDTO", new StudentDTO());
+        model.addAttribute("studentStatus", Arrays.asList(STUDENT_STATUS.values()));
+        model.addAttribute("classes", classService.listClass());
         return "adminPages/forms/add";
     }
 
     @PostMapping("/add")
     public String addUser(User user) {
         userService.save(user);
+        check = true;
         return "redirect:/admin";
     }
+
     @PostMapping("/saveSubject")
     public String saveSubject(@ModelAttribute("subject") Subject subject) {
         subjectService.saveSubject(subject);
+        check = true;
         return "redirect:/admin";
     }
+
+    @PostMapping("/saveStudent")
+    public String saveSubject(@ModelAttribute("student") StudentDTO studentDTO) {
+        User user = userService.findByFullName(studentDTO.getUserName());
+        Classes classes = classService.findById(studentDTO.getClassId());
+        Student student = new Student();
+        student.setUser(user);
+        student.setClassName(classes);
+        student.setStatus(studentDTO.getStatus());
+        studentService.save(student);
+        check = true;
+        return "redirect:/admin";
+    }
+
     @GetMapping("/averageGrade/{id}")
 
     public String checkFeesAndSendReminders(Model model, @PathVariable long id) {
