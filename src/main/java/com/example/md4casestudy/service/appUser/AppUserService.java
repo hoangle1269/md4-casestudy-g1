@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -28,10 +29,12 @@ public class AppUserService implements IAppUserService {
     public User findById(Long id) {
         return appUserRepo.findById(id).orElse(null);
     }
+
     public User findByFullName(String fullName) {
         return appUserRepo.findByFullName(fullName);
 
     }
+
     @Override
     public void save(User appUser) {
         appUserRepo.save(appUser);
@@ -62,5 +65,9 @@ public class AppUserService implements IAppUserService {
             throw new UsernameNotFoundException("User not found with email: " + userEmail);
         }
         return UserPrinciple.build(user);
+    }
+
+    public List<User> getLecturers() {
+        return appUserRepo.findByRole("lecturer");
     }
 }

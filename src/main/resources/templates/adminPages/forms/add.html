@@ -312,24 +312,47 @@
                                         <input type="text" class="form-control" id="sutudent" th:field="*{userName}"
                                                placeholder="Student Name...">
                                         <div class="col-sm-9">
-                                            <label for="Student" class="form-label">Student</label>
-                                            <select id="Student" th:field="*{classId}" class="form-select">
+                                            <label for="Student" class="form-label">Class</label>
+                                            <select id="Student" th:field="*{classId}" class="form-select form-control">
                                                 <option class="forms-sample text-dark" th:each="class : ${classes}"
                                                         th:value="${class.classId}"
                                                         th:text="${class.className}"></option>
                                             </select>
                                         </div>
                                         <div class="col-sm-9">
-                                            <label>
-                                                <select style="width: 109%" th:field="*{status}"
-                                                        class="form-control">
-                                                    <option value="" disabled selected>Select Status</option>
-                                                    <option th:each="status : ${studentStatus}"
-                                                            th:value="${status.getRoleName()}"
-                                                            th:text="${status.getRoleName()}">Role
-                                                    </option>
-                                                </select>
-                                            </label>
+                                            <label for="status" class="form-label"> Status </label>
+                                            <select  id="status" style="width: 100%" th:field="*{status}"
+                                                    class="form-select form-control">
+                                                <option value="" disabled selected>Select Status</option>
+                                                <option th:each="status : ${studentStatus}"
+                                                        th:value="${status.getRoleName()}"
+                                                        th:text="${status.getRoleName()}">Role
+                                                </option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary me-2">Submit</button>
+                                    <a href="/admin/moreInfo" class="btn btn-light">Cancel</a>
+                                </form>
+                            </div>
+                            <hr>
+                            <div class="card-body">
+                                <h4 class="card-title">Add Class</h4>
+                                <form th:action="@{/admin/saveClass}" th:object="${class}" method="post"
+                                      class="forms-sample">
+                                    <div class="form-group row">
+                                        <label for="class" class="col-sm-3 col-form-label">Class Name</label>
+                                        <input type="text" class="form-control" id="class" th:field="*{className}"
+                                               placeholder="Class Name...">
+                                        <div class="col-sm-9">
+                                            <label for="Lecturer" class="form-label">Lecturer</label>
+                                            <select id="Lecturer" th:field="*{lecturer}" class="form-select form-control">
+                                                <option class="forms-sample form-control text-dark"
+                                                        th:each="lecturer : ${listLecturer}"
+                                                        th:value="${lecturer.id}"
+                                                        th:text="${lecturer.fullName}"></option>
+                                            </select>
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-primary me-2">Submit</button>

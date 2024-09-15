@@ -89,6 +89,9 @@ public class AdminController {
         model.addAttribute("studentDTO", new StudentDTO());
         model.addAttribute("studentStatus", Arrays.asList(STUDENT_STATUS.values()));
         model.addAttribute("classes", classService.listClass());
+        model.addAttribute("class", new Classes());
+        model.addAttribute("listLecturer", userRepository.findByRole(ROLE.ROLE_LECTURER.getRoleName()));
+
         return "adminPages/forms/add";
     }
 
