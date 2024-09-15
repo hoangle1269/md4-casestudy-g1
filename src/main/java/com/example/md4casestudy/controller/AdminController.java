@@ -14,6 +14,7 @@ import com.example.md4casestudy.repository.UserRepository;
 import com.example.md4casestudy.model.dto.TeacherStudentCountDTO;
 import com.example.md4casestudy.service.appUser.AppUserService;
 import com.example.md4casestudy.service.classes.ClassService;
+import com.example.md4casestudy.service.fee.FeeService;
 import com.example.md4casestudy.service.student.StudentService;
 import com.example.md4casestudy.service.subject.SubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +41,10 @@ public class AdminController {
     private ClassService classService;
     @Autowired
     private StudentService studentService;
-boolean check = false;
+    @Autowired
+    private FeeService feeService;
+    boolean check = false;
+
     @GetMapping
     public String homePage(Model model) {
         List<TeacherStudentCountDTO> teacherStudentCountDTO = userRepository.findTeacherStudentCounts();
@@ -52,7 +56,7 @@ boolean check = false;
         }
         model.addAttribute("teacherStudentCountDTO", teacherStudentCount);
         model.addAttribute("teacher", teacherStudentCountDTO);
-        model.addAttribute("check",check);
+        model.addAttribute("check", check);
         check = false;
         return "adminPages/index";
     }
@@ -111,6 +115,7 @@ boolean check = false;
         student.setClassName(classes);
         student.setStatus(studentDTO.getStatus());
         studentService.save(student);
+        feeService.save(student);
         check = true;
         return "redirect:/admin";
     }

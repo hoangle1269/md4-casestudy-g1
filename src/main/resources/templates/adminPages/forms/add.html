@@ -323,7 +323,7 @@
                                             <label>
                                                 <select style="width: 109%" th:field="*{status}"
                                                         class="form-control">
-                                                    <option value="" disabled selected>Select Role</option>
+                                                    <option value="" disabled selected>Select Status</option>
                                                     <option th:each="status : ${studentStatus}"
                                                             th:value="${status.getRoleName()}"
                                                             th:text="${status.getRoleName()}">Role
