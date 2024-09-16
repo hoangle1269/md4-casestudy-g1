@@ -59,12 +59,15 @@ public class AppUserService implements IAppUserService {
 
     @Override
     public UserDetails loadUserByUsername(String userEmail) throws UsernameNotFoundException {
-        Optional<User> userOptional = appUserRepo.findByEmail(userEmail);
-        User user = userOptional.get();
+        User user = appUserRepo.findByEmail(userEmail);
         if (user == null) {
             throw new UsernameNotFoundException("User not found with email: " + userEmail);
         }
         return UserPrinciple.build(user);
+    }
+
+    public User findByEmail(String email) {
+        return appUserRepo.findByEmail(email);
     }
 
     public List<User> getLecturers() {

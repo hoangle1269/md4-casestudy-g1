@@ -12,6 +12,7 @@ import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -51,6 +52,10 @@ public class StudentService {
 
     }
 
+    public Student getById(Long id) {
+        return studentRepository.findByUserId(id)
+                .orElseThrow(() -> new NoSuchElementException("No student found with user id: " + id));
+    }
 
     public List<StudentIdDTO> listStudent(Long classId) {
         return studentRepository.listStudent(classId);

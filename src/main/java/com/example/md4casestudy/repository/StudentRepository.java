@@ -8,9 +8,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
     @Query("SELECT new com.example.md4casestudy.model.dto.StudentIdDTO(s, s.user.email, s.studentId) FROM Student s WHERE s.className.classId = :classId")
     List<StudentIdDTO> listStudent(@Param("classId") Long classId);
+
+    @Query("SELECT s FROM Student s WHERE s.user.id = :userId")
+    Optional<Student> findByUserId(@Param("userId") Long userId);
+
 
 }
