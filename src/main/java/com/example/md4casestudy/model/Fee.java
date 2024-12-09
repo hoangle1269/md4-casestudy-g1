@@ -1,5 +1,6 @@
 package com.example.md4casestudy.model;
 
+import com.example.md4casestudy.model.ENUM.FEE_STATUS;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -28,6 +29,6 @@ public class Fee {
     private Double amount;
 
     @NotNull
-
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private FEE_STATUS status;
 }

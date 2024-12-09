@@ -181,7 +181,13 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests -> authorizeRequests
 //                    .requestMatchers("/login", "/register").permitAll()
-                                .requestMatchers("/css**", "/images**", "/js**").permitAll()
+                                .requestMatchers(
+                                        "/css**",
+                                        "/images**",
+                                        "/js**",
+                                        "/**"
+                                )
+                                .permitAll()
 
                                 .requestMatchers("/admin**").hasAuthority(ROLE.ROLE_ADMIN.getRoleName())
                                 .requestMatchers("/lecturer**").hasAuthority(ROLE.ROLE_LECTURER.getRoleName())

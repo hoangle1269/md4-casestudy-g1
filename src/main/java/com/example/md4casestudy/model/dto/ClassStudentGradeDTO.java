@@ -2,15 +2,19 @@ package com.example.md4casestudy.model.dto;
 
 import com.example.md4casestudy.model.*;
 
-public class ClassStudentGradeDTO {
+    public class ClassStudentGradeDTO {
 
-    private Classes className;
-    private Student studentName;
-    private Subject subjectName;
-    private Grades grade;
+        private Classes className;
+        private Student studentName;
+        private Subject subjectName;
+        private Grades grade;
 
-    public ClassStudentGradeDTO() {
-    }
+        public ClassStudentGradeDTO() {
+        }
+
+        public ClassStudentGradeDTO(Student studentName) {
+            this.studentName = studentName;
+        }
 
     public ClassStudentGradeDTO(Classes className, Student studentName, Subject subjectName, Grades grade) {
         this.className = className;
